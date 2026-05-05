@@ -1,0 +1,43 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
+[ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://camera/follow_camera.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://ui/action_button.tscn" id="5"]
+[ext_resource type="Script" path="res://interaction/interaction_manager.gd" id="6"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(2560, 1440)
+
+[node name="Zone1ForestEntry" type="Node2D"]
+script = ExtResource("1")
+zone_id = &"ep1.zone_1"
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="WalkableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkableArea"]
+shape = SubResource("RectangleShape2D_1")
+
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="OrangeCharacter" parent="." instance=ExtResource("2")]
+
+[node name="FollowCamera" parent="." instance=ExtResource("3")]
+target_path = NodePath("../OrangeCharacter")
+
+[node name="HUD" parent="." instance=ExtResource("4")]
+
+[node name="ActionButton" parent="." instance=ExtResource("5")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("7")]
+
+[node name="HintButton" parent="." instance=ExtResource("8")]
+
+[node name="InteractionManager" type="Node" parent="."]
+script = ExtResource("6")
+orange = NodePath("OrangeCharacter")
