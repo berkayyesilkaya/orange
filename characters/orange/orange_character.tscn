@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://characters/orange/orange_character.gd" id="1"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 8.0
+height = 6.0
+
+[node name="OrangeCharacter" type="CharacterBody2D"]
+script = ExtResource("1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 16)
+shape = SubResource("CapsuleShape2D_1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
