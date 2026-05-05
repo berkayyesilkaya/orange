@@ -1,0 +1,26 @@
+{
+    "ep1.intro": {
+        "orange": "Mimi ruu...?",
+        "english": "The mushrooms are trying to show me something."
+    },
+    "ep1.mushroom_path_start": {
+        "orange": "Oru ki raa!",
+        "english": "They glow differently... small to large, maybe?"
+    },
+    "ep1.mushroom_wrong": {
+        "orange": "Aa... na.",
+        "english": "That doesn't feel right. Let me look again."
+    },
+    "ep1.mushroom_solved": {
+        "orange": "Miru kalaa~",
+        "english": "They lit up! A path revealed itself in the rain."
+    },
+    "ep1.animal_tracks_start": {
+        "orange": "Suu veri?",
+        "english": "So many tracks... one set is fresher than the rest."
+    },
+    "ep1.map_completed": {
+        "orange": "Miruu! Kalaa ruu!",
+        "english": "The map... it's whole now. Where does it lead?"
+    }
+}
