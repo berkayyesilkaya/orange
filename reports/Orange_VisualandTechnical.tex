@@ -1,0 +1,1196 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\setstretch{1.2}
+
+\titleformat{\section}
+  {\large\bfseries}
+  {\thesection.}
+  {0.5em}
+  {}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}
+  {\thesubsection.}
+  {0.5em}
+  {}
+
+\title{\textbf{Orange: Visual and Technical Direction Report}\\
+\large Art Direction, Engine Strategy, Solo Development Workflow, and Modular Implementation Structure}
+\author{Creative Game Design Department \& Product Department}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Report Purpose}
+
+This report defines the visual, technical, and production direction for \textit{Orange}. It is prepared to support solo development with AI-assisted coding agents and to serve as a structured reference document for future modular implementation planning.
+
+The purpose of this report is not to describe the full story or puzzle content. Story and puzzle logic are documented separately in the forest arc episode structure report. This document focuses on how the game should look, feel, be structured, and be prepared for implementation.
+
+The project is designed for a solo creator working with coding AI agents. Therefore, all decisions prioritize clarity, modularity, maintainability, and realistic production scope.
+
+\section{Core Production Philosophy}
+
+\textit{Orange} should be developed as a small but emotionally polished game. The project should avoid unnecessary technical complexity, excessive asset volume, or heavy systems that slow solo production.
+
+The guiding production principle is:
+
+\begin{center}
+\textbf{Simple to play, modular to build, emotionally rich through puzzles and atmosphere.}
+\end{center}
+
+The game should feel cozy, readable, and easy to interact with. The player should spend mental energy on understanding nature-based puzzles, not on understanding controls, menus, or technical systems.
+
+\section{Visual Direction}
+
+\subsection{Primary Visual Style}
+
+The selected visual style is:
+
+\begin{center}
+\textbf{Medium-detail cozy soft pixel art}
+\end{center}
+
+The game should use a clean, minimalist visual foundation with carefully selected vibrant oil-pastel-like pigments. The design should avoid color overload. The overall screen composition should remain simple, readable, and powerful.
+
+The visual identity should communicate:
+
+\begin{itemize}[leftmargin=*]
+    \item coziness,
+    \item softness,
+    \item emotional warmth,
+    \item nature-inspired mystery,
+    \item gentle visual charm,
+    \item clear puzzle readability.
+\end{itemize}
+
+\subsection{Color and Pigment Direction}
+
+The visual palette should use impactful and vibrant color moments, but not everywhere at once.
+
+The general rule is:
+
+\begin{center}
+\textbf{Calm backgrounds, strong color accents.}
+\end{center}
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange's curly hair should be the strongest recurring color identity.
+    \item Mushrooms, puzzle symbols, map fragments, compass details, and teleportation effects may use stronger pigments.
+    \item Background forests should remain calm and readable.
+    \item Rainy scenes may use soft blue-gray and muted greens.
+    \item Sunny waterfall scenes may use warm gold, clean greens, white mist, and small rainbow accents.
+    \item Ancient tree scenes may use deeper greens, brown roots, soft wind highlights, and controlled magical glow.
+\end{itemize}
+
+\subsection{Detail Level}
+
+The selected detail level is:
+
+\begin{center}
+\textbf{Medium-detail pixel art}
+\end{center}
+
+This means the game should not be too simple, but also should not become visually dense. Important objects should receive more detail than background decoration.
+
+Detail priority:
+
+\begin{enumerate}[leftmargin=*]
+    \item Orange character and hair
+    \item puzzle objects
+    \item key items
+    \item illustration fragments
+    \item environmental signs related to puzzles
+    \item background decoration
+\end{enumerate}
+
+The world should be clean, but puzzle clues should be detailed enough to notice.
+
+\subsection{Camera Style}
+
+The selected camera style is:
+
+\begin{center}
+\textbf{Isometric view}
+\end{center}
+
+The isometric perspective supports the desired magical storybook feeling. It also helps each outdoor area feel like a small, handcrafted diorama.
+
+The isometric view should remain simple and readable. Maps should not become visually crowded or difficult to navigate.
+
+\subsection{Character Style}
+
+The selected character style is:
+
+\begin{center}
+\textbf{Chibi isometric}
+\end{center}
+
+Orange should have a small, cute, readable body shape with expressive curly orange hair. Her hair is her strongest visual identity and should remain recognizable even at small scale.
+
+Orange should feel:
+
+\begin{itemize}[leftmargin=*]
+    \item cute,
+    \item curious,
+    \item warm,
+    \item gentle,
+    \item expressive,
+    \item easy to recognize.
+\end{itemize}
+
+\subsection{Environment Rendering}
+
+The selected environment rendering approach is:
+
+\begin{center}
+\textbf{Mixed clean and soft-textured environment design}
+\end{center}
+
+The environment should use clean readable shapes as the foundation. Soft texture should be added selectively, especially on important surfaces.
+
+Examples of selective texture use:
+
+\begin{itemize}[leftmargin=*]
+    \item wet bark symbols,
+    \item mossy stones,
+    \item waterfall mist,
+    \item ancient tree roots,
+    \item map card surface,
+    \item compass face,
+    \item teleportation door glow.
+\end{itemize}
+
+The environment should not be overly detailed. Visual clarity must remain more important than decorative density.
+
+\section{Lighting and Effects Direction}
+
+\subsection{Visual Format}
+
+The selected visual format is:
+
+\begin{center}
+\textbf{Pixel-art sprites with soft lighting and effects}
+\end{center}
+
+Pixel art should remain the base identity. Lighting and effects should support emotion and atmosphere without breaking the pixel-art feeling.
+
+The lighting rule is:
+
+\begin{center}
+\textbf{Pixel art is the base. Lighting is the emotion.}
+\end{center}
+
+\subsection{Episode-Based Lighting Examples}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Episode 1: Rain-Found Forest} should use soft blue-gray shadows, rain effects, damp surfaces, puddle reflections, and subtle wet bark highlights.
+    \item \textbf{Episode 2: Sunlit Waterfall} should use warm sunbeams, mist glow, reflected water light, and hopeful brightness.
+    \item \textbf{Episode 3: River to the Ancient Tree} should use moving wind shadows, soft root glows, river reflections, and the largest magical effect for the teleportation door.
+\end{itemize}
+
+\section{Animation Direction}
+
+\subsection{Animation Level}
+
+The selected animation level is:
+
+\begin{center}
+\textbf{Moderate animation}
+\end{center}
+
+Animation should add emotional life without becoming too expensive for solo production.
+
+\subsection{Expected Animation Types}
+
+Orange should include:
+
+\begin{itemize}[leftmargin=*]
+    \item idle animation,
+    \item walking animation,
+    \item blinking,
+    \item small looking-around reactions,
+    \item soft curly hair bounce,
+    \item simple puzzle reaction poses.
+\end{itemize}
+
+Nature should include:
+
+\begin{itemize}[leftmargin=*]
+    \item rain loops,
+    \item puddle ripples,
+    \item mushroom sparkle or growth feedback,
+    \item river movement,
+    \item waterfall mist,
+    \item leaf movement,
+    \item branch swaying,
+    \item soft light beams.
+\end{itemize}
+
+Puzzle rewards should include:
+
+\begin{itemize}[leftmargin=*]
+    \item fragment appearance,
+    \item collection feedback,
+    \item picture frame filling,
+    \item key item completion animation,
+    \item teleportation door opening animation.
+\end{itemize}
+
+The animation rule is:
+
+\begin{center}
+\textbf{Small animations everywhere, big animation only for important story rewards.}
+\end{center}
+
+\section{User Interface Direction}
+
+\subsection{UI Style}
+
+The selected UI style is:
+
+\begin{center}
+\textbf{Minimal cozy UI with pixel notebook flavor}
+\end{center}
+
+The UI should feel like a light field notebook, but it should not become a complex journal system. The interface should remain simple, touch-friendly, and easy to understand.
+
+\subsection{UI Principles}
+
+\begin{itemize}[leftmargin=*]
+    \item Few buttons.
+    \item Large touch-friendly icons.
+    \item No crowded menus.
+    \item One contextual action button.
+    \item Very small key item system.
+    \item Visual progress through a mini picture frame.
+    \item Soft hint button only when needed.
+\end{itemize}
+
+The UI rule is:
+
+\begin{center}
+\textbf{The player should think about the puzzle, not the controls.}
+\end{center}
+
+\subsection{Episode Progress Display}
+
+Episode progress should be shown through a:
+
+\begin{center}
+\textbf{Mini picture frame}
+\end{center}
+
+The mini picture frame represents the illustration being completed in the current episode. It should fill visually as fragments are collected.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Episode 1 frame: Secret Map Card
+    \item Episode 2 frame: Mixed Compass
+    \item Episode 3 frame: Teleportation Door
+\end{itemize}
+
+The progress rule is:
+
+\begin{center}
+\textbf{Progress should feel visual, not like a checklist.}
+\end{center}
+
+\section{Dialogue and Text Direction}
+
+\subsection{Orange's Voice}
+
+Orange should speak in her own cute fictional language. This gives her a distinctive identity and makes the world feel magical.
+
+The player should understand meaning through a small English text box.
+
+Example:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange's fictional speech: ``Mimi ruu?''
+    \item English text box: ``The mushrooms are trying to show me something.''
+\end{itemize}
+
+\subsection{Dialogue Display}
+
+The selected dialogue display approach is:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange's translated thoughts appear in a small bottom text box.
+    \item Items and environmental objects use floating minimal text near them.
+\end{itemize}
+
+The writing should use short poetic lines. It should show personality, but it should not become text-heavy.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item ``Rain makes the forest whisper.''
+    \item ``The map feels warmer here.''
+    \item ``The compass is nervous.''
+    \item ``This tree remembers the river.''
+\end{itemize}
+
+\section{Hint System}
+
+\subsection{Hint Complexity}
+
+The selected hint system is:
+
+\begin{center}
+\textbf{One-level gentle hint}
+\end{center}
+
+There should not be multiple hint levels. The hint system must stay simple.
+
+\subsection{Hint Behavior}
+
+The hint should softly guide the player without solving the puzzle.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item ``The mushrooms seem to be growing in a quiet order.''
+    \item ``The map feels warmer under the sunlight.''
+    \item ``The compass trusts the river more than the path.''
+    \item ``The wind is moving the branches like a song.''
+\end{itemize}
+
+The hint rule is:
+
+\begin{center}
+\textbf{A hint should softly point the player, not solve the puzzle.}
+\end{center}
+
+\section{Sound and Music Direction}
+
+\subsection{Base Sound Direction}
+
+The selected sound direction is:
+
+\begin{center}
+\textbf{Nature ambience with gentle music}
+\end{center}
+
+The game should use calm background music combined with natural environmental sound.
+
+Expected ambience:
+
+\begin{itemize}[leftmargin=*]
+    \item rain,
+    \item birds,
+    \item river,
+    \item waterfall,
+    \item wind,
+    \item leaves,
+    \item soft magical object sounds.
+\end{itemize}
+
+\subsection{Episode-Based Music}
+
+Background music should change according to each episode's environment and emotional tone.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Episode 1: rainy, curious forest music.
+    \item Episode 2: bright, hopeful waterfall music.
+    \item Episode 3: deeper, wind-filled ancient tree music.
+\end{itemize}
+
+The music rule is:
+
+\begin{center}
+\textbf{Same cozy identity, different emotional flavor per episode.}
+\end{center}
+
+\subsection{Sound in Puzzles}
+
+Sound may be used in some puzzles, but rarely. No puzzle should depend only on perfect hearing. Visual support must always exist.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item raindrop rhythm puzzle in Episode 1,
+    \item whispering branches puzzle in Episode 3.
+\end{itemize}
+
+The accessibility rule is:
+
+\begin{center}
+\textbf{Sound can guide the player, but visuals must also support the solution.}
+\end{center}
+
+\section{Engine and Programming Direction}
+
+\subsection{Game Engine}
+
+The selected game engine is:
+
+\begin{center}
+\textbf{Godot 4.x}
+\end{center}
+
+Godot is selected because the game requires 2D systems, isometric maps, puzzle interactions, UI, save logic, animation, and responsive web export. It also supports a modular scene-based workflow suitable for solo development.
+
+\subsection{Target Platform}
+
+The first release target is:
+
+\begin{center}
+\textbf{Responsive web}
+\end{center}
+
+The game should be playable in a browser and designed with touch-friendly interaction from the beginning.
+
+The platform rule is:
+
+\begin{center}
+\textbf{Design for touch, but make desktop feel natural too.}
+\end{center}
+
+\subsection{Programming Language}
+
+The selected scripting language is:
+
+\begin{center}
+\textbf{GDScript}
+\end{center}
+
+GDScript is selected because it is simple, native to Godot, readable, fast to iterate with, and suitable for modular AI-assisted development. It is also a better fit than C\# for the first responsive web prototype.
+
+\section{Control and Interaction Design}
+
+\subsection{Movement}
+
+The selected movement style is:
+
+\begin{center}
+\textbf{Free tap/click movement}
+\end{center}
+
+The player taps or clicks a walkable area, and Orange walks there.
+
+This supports:
+
+\begin{itemize}[leftmargin=*]
+    \item relaxed cozy exploration,
+    \item isometric maps,
+    \item mobile-friendly control,
+    \item clean screen layout,
+    \item simple player input.
+\end{itemize}
+
+\subsection{Object Interaction}
+
+The selected object interaction style is:
+
+\begin{center}
+\textbf{Contextual one-button action}
+\end{center}
+
+Interaction flow:
+
+\begin{enumerate}[leftmargin=*]
+    \item Player taps or clicks an object.
+    \item Orange walks to the object.
+    \item One clear contextual action button appears.
+    \item Player taps or clicks the action button.
+    \item The object responds according to its context.
+\end{enumerate}
+
+There should be no complex action menu.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Mushroom cluster: Inspect
+    \item Shiny stone: Rotate
+    \item Map spot: Use Map
+    \item Fragment: Collect
+    \item Ancient tree symbol: Activate
+\end{itemize}
+
+\section{Map and Zone Structure}
+
+\subsection{Map Creation Style}
+
+The selected map creation style is:
+
+\begin{center}
+\textbf{Hybrid isometric maps}
+\end{center}
+
+This means reusable isometric tiles should form the base, while important story and puzzle areas should receive handmade special details.
+
+The map rule is:
+
+\begin{center}
+\textbf{Reusable world, handmade story moments.}
+\end{center}
+
+\subsection{Episode Map Size}
+
+Each episode should use:
+
+\begin{center}
+\textbf{Medium maps with 3 to 4 connected zones}
+\end{center}
+
+This gives enough room for exploration and puzzle variety without overwhelming solo development.
+
+Example structure:
+
+\begin{itemize}[leftmargin=*]
+    \item Zone 1: introductory puzzle or bridge.
+    \item Zone 2: first major puzzle area.
+    \item Zone 3: second major puzzle area.
+    \item Zone 4: final reward or transition area.
+\end{itemize}
+
+\subsection{Zone Transitions}
+
+The selected transition style is:
+
+\begin{center}
+\textbf{Mixed movement and soft transitions}
+\end{center}
+
+Orange moves freely inside each zone. When she reaches a zone exit, the game uses a soft transition to the next zone.
+
+The transition rule is:
+
+\begin{center}
+\textbf{Small explorable spaces, soft transitions between them.}
+\end{center}
+
+\section{Technical Architecture}
+
+\subsection{Project Architecture}
+
+The selected architecture is:
+
+\begin{center}
+\textbf{Scene-based modular structure}
+\end{center}
+
+The Godot project should use separate scenes and scripts for major systems.
+
+Expected modules:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange character controller,
+    \item zone scenes,
+    \item interactable objects,
+    \item contextual action system,
+    \item puzzle framework,
+    \item fragment collection system,
+    \item mini picture frame UI,
+    \item key item system,
+    \item dialogue system,
+    \item hint system,
+    \item save system,
+    \item transition system,
+    \item episode controller.
+\end{itemize}
+
+This architecture supports modular prompts for coding AI agents.
+
+\subsection{Puzzle System Structure}
+
+The selected puzzle system approach is:
+
+\begin{center}
+\textbf{Hybrid puzzle system}
+\end{center}
+
+Each puzzle should share a base structure, but individual puzzles may contain custom logic.
+
+Shared puzzle flow:
+
+\begin{enumerate}[leftmargin=*]
+    \item Puzzle becomes available.
+    \item Player interacts with relevant objects.
+    \item Puzzle checks solution state.
+    \item Success feedback plays.
+    \item Illustration fragment appears.
+    \item Player manually collects the fragment.
+    \item Progress is saved.
+\end{enumerate}
+
+This allows the game to support custom puzzles like mushroom paths, animal tracks, raindrop rhythm, wet bark symbols, sunlight map activation, water flow, and compass behavior while preserving consistent reward logic.
+
+\section{Inventory and Key Item System}
+
+\subsection{Key Item Scope}
+
+The selected inventory approach is:
+
+\begin{center}
+\textbf{Very small fixed key item system}
+\end{center}
+
+There should not be a large inventory. Only major story tools should be treated as key items.
+
+Forest arc key items:
+
+\begin{itemize}[leftmargin=*]
+    \item Secret Map Card,
+    \item Mixed Compass.
+\end{itemize}
+
+The key item rule is:
+
+\begin{center}
+\textbf{No item clutter. Only story-important tools.}
+\end{center}
+
+\subsection{Key Item Usage}
+
+Key items should stay meaningful across episodes.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item The Secret Map Card is completed in Episode 1 and used in Episode 2.
+    \item The Mixed Compass is completed in Episode 2 and used in Episode 3.
+\end{itemize}
+
+\section{Illustration Fragment System}
+
+\subsection{Fragment Collection}
+
+The selected fragment system is:
+
+\begin{center}
+\textbf{Manual collection}
+\end{center}
+
+Flow:
+
+\begin{enumerate}[leftmargin=*]
+    \item Player solves puzzle.
+    \item Fragment appears in the scene.
+    \item Player taps or clicks the fragment.
+    \item Orange walks to it.
+    \item Player collects the fragment.
+    \item Fragment is added to the mini picture frame.
+    \item Game saves progress.
+\end{enumerate}
+
+The fragment rule is:
+
+\begin{center}
+\textbf{Solving gives access. Collecting gives ownership.}
+\end{center}
+
+\section{Save System}
+
+\subsection{Save Frequency}
+
+The selected save strategy is:
+
+\begin{center}
+\textbf{Save after every puzzle reward}
+\end{center}
+
+Whenever the player earns and collects an illustration fragment, the game should save.
+
+The save should protect:
+
+\begin{itemize}[leftmargin=*]
+    \item completed puzzles,
+    \item collected fragments,
+    \item current episode progress,
+    \item key items,
+    \item zone state,
+    \item important bridge progress.
+\end{itemize}
+
+The save rule is:
+
+\begin{center}
+\textbf{Every meaningful cozy moment should be safely saved.}
+\end{center}
+
+\section{Data Structure}
+
+\subsection{Data Storage Approach}
+
+The selected data approach is:
+
+\begin{center}
+\textbf{Hybrid data structure}
+\end{center}
+
+\subsection{JSON Usage}
+
+JSON files should be used for editable narrative content.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item translated Orange dialogue,
+    \item short poetic lines,
+    \item hint text,
+    \item object labels,
+    \item floating text,
+    \item episode text.
+\end{itemize}
+
+\subsection{Godot Resource Usage}
+
+Godot Resources should be used for gameplay-facing data.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item puzzle definitions,
+    \item key item definitions,
+    \item fragment rewards,
+    \item interactable references,
+    \item scene references,
+    \item audio references.
+\end{itemize}
+
+The data rule is:
+
+\begin{center}
+\textbf{Text stays easy to edit. Gameplay data stays Godot-native.}
+\end{center}
+
+\section{Asset Production Workflow}
+
+\subsection{Core Tools}
+
+The selected solo production toolset is:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Godot 4.x} for game development,
+    \item \textbf{GDScript} for scripting,
+    \item \textbf{Aseprite} for final pixel-art assets and animation,
+    \item \textbf{Blender} as optional support for isometric scene blockouts and lighting/color reference,
+    \item \textbf{Krita} as optional later support for mood sketches and concept art.
+\end{itemize}
+
+\subsection{Aseprite Role}
+
+Aseprite should be the main art production tool for final assets.
+
+Expected Aseprite uses:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange character sprites,
+    \item walking animation,
+    \item object sprites,
+    \item tiles,
+    \item UI icons,
+    \item fragment art,
+    \item key item art,
+    \item small environmental animations.
+\end{itemize}
+
+\subsection{Blender Role}
+
+Blender should be used only as a support tool, not as the main production pipeline.
+
+Selected Blender role:
+
+\begin{center}
+\textbf{Scene blockouts plus lighting and color reference}
+\end{center}
+
+Workflow:
+
+\begin{center}
+\textbf{Blender rough scene} $\rightarrow$
+\textbf{screenshot reference} $\rightarrow$
+\textbf{Aseprite pixel-art version} $\rightarrow$
+\textbf{Godot scene}
+\end{center}
+
+Blender should help with:
+
+\begin{itemize}[leftmargin=*]
+    \item isometric composition,
+    \item waterfall layout,
+    \item river path planning,
+    \item ancient tree scale,
+    \item sunlight direction,
+    \item shadow reference,
+    \item overall scene readability.
+\end{itemize}
+
+\subsection{Krita Role}
+
+Krita is optional and should not be required at the beginning. It may be introduced later for mood sketches, color concepts, and oil-pastel texture exploration.
+
+For the first playable prototype, the preferred workflow is:
+
+\begin{center}
+\textbf{Godot + Aseprite first. Krita later if needed.}
+\end{center}
+
+\section{Asset Organization}
+
+\subsection{Folder Structure}
+
+The selected asset organization is:
+
+\begin{center}
+\textbf{Hybrid folder structure}
+\end{center}
+
+Shared systems and shared assets should be stored in common folders. Episode-specific assets should be stored inside episode folders.
+
+\subsection{Shared Folders}
+
+Shared folders should include:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange character,
+    \item UI,
+    \item shared audio,
+    \item shared effects,
+    \item interaction system,
+    \item save system,
+    \item puzzle framework,
+    \item key item system.
+\end{itemize}
+
+\subsection{Episode Folders}
+
+Episode folders should include:
+
+\begin{itemize}[leftmargin=*]
+    \item episode-specific maps,
+    \item episode-specific puzzle objects,
+    \item episode-specific music,
+    \item episode-specific ambience,
+    \item episode-specific dialogue JSON,
+    \item episode-specific fragment art.
+\end{itemize}
+
+The organization rule is:
+
+\begin{center}
+\textbf{Shared systems stay reusable. Episode content stays easy to find.}
+\end{center}
+
+\section{Responsive Web and Screen Design}
+
+\subsection{First Release Platform}
+
+The first release target is:
+
+\begin{center}
+\textbf{Responsive web}
+\end{center}
+
+The game should be playable on desktop and mobile browsers.
+
+\subsection{Orientation}
+
+The selected orientation priority is:
+
+\begin{center}
+\textbf{Landscape first}
+\end{center}
+
+Landscape orientation is preferred because isometric maps need horizontal space, and puzzle areas benefit from wider composition.
+
+\subsection{Resolution Strategy}
+
+The selected resolution strategy is:
+
+\begin{center}
+\textbf{Responsive scaling}
+\end{center}
+
+The game should maintain a consistent pixel-art look while scaling cleanly across different screen sizes.
+
+The screen rule is:
+
+\begin{center}
+\textbf{One clean game layout, scaled carefully across devices.}
+\end{center}
+
+\section{Prototype Scope}
+
+\subsection{First Playable Version}
+
+The selected prototype scope is:
+
+\begin{center}
+\textbf{Episode 1 plus Episode 2 bridge}
+\end{center}
+
+The first playable version should include:
+
+\begin{itemize}[leftmargin=*]
+    \item Orange movement,
+    \item isometric forest zone structure,
+    \item contextual interactions,
+    \item Episode 1 puzzle examples,
+    \item illustration fragment collection,
+    \item mini picture frame progress,
+    \item Secret Map Card completion,
+    \item sunlight activation bridge into Episode 2.
+\end{itemize}
+
+The prototype does not need to contain the full waterfall episode. It should end after the Secret Map Card is activated by sunlight and the waterfall route appears.
+
+\subsection{Prototype Art Quality}
+
+The selected prototype art quality is:
+
+\begin{center}
+\textbf{Simple but charming prototype art}
+\end{center}
+
+The prototype should feel like \textit{Orange}, but it does not need final polish.
+
+It should include:
+
+\begin{itemize}[leftmargin=*]
+    \item simple chibi Orange sprite,
+    \item readable curly orange hair,
+    \item basic isometric forest tiles,
+    \item cozy rain atmosphere,
+    \item simple mushrooms,
+    \item animal tracks,
+    \item puddles,
+    \item bark symbols,
+    \item basic fragment visuals,
+    \item simple Secret Map Card visual.
+\end{itemize}
+
+Avoid in the first prototype:
+
+\begin{itemize}[leftmargin=*]
+    \item too many unique trees,
+    \item complex animation sets,
+    \item final lighting polish,
+    \item excessive decoration,
+    \item perfect oil-pastel texture.
+\end{itemize}
+
+The prototype rule is:
+
+\begin{center}
+\textbf{Readable first, charming second, polished later.}
+\end{center}
+
+\section{AI-Assisted Development Strategy}
+
+\subsection{Coding Strategy}
+
+The selected coding strategy is:
+
+\begin{center}
+\textbf{Small modular tasks}
+\end{center}
+
+This is one of the most important production decisions for the project. The final technical documentation should allow a high-level AI model to generate modular implementation prompts, which can then be given one by one to coding agents.
+
+The AI-assisted workflow should be:
+
+\begin{enumerate}[leftmargin=*]
+    \item Prepare official reports.
+    \item Give reports to a high-level reasoning model.
+    \item Ask it to create modular implementation prompts.
+    \item Give one implementation prompt at a time to coding agents.
+    \item Test each module.
+    \item Commit each finished module to Git.
+\end{enumerate}
+
+\subsection{Recommended Module Order}
+
+The recommended implementation order is:
+
+\begin{enumerate}[leftmargin=*]
+    \item Base Godot 4.x project setup.
+    \item Folder structure and naming conventions.
+    \item Orange character scene.
+    \item Free tap/click movement.
+    \item Camera follow system.
+    \item Zone scene prototype.
+    \item Contextual interaction system.
+    \item Basic UI layer.
+    \item Dialogue and floating text system.
+    \item One-level hint system.
+    \item Puzzle base class or base structure.
+    \item Manual fragment collection system.
+    \item Mini picture frame progress UI.
+    \item Key item system.
+    \item Save system after puzzle reward.
+    \item Episode controller.
+    \item Episode 1 mushroom path prototype.
+    \item Episode 1 animal tracks prototype.
+    \item Episode 1 raindrop rhythm prototype.
+    \item Episode 1 wet bark symbol prototype.
+    \item Secret Map Card completion.
+    \item Episode 2 sunlight activation bridge.
+    \item Web export testing.
+\end{enumerate}
+
+The modular development rule is:
+
+\begin{center}
+\textbf{One task, one module, one test, one commit.}
+\end{center}
+
+\section{Version Control}
+
+\subsection{Version Control Tool}
+
+The selected version control approach is:
+
+\begin{center}
+\textbf{Git + GitHub from the beginning}
+\end{center}
+
+This is essential because AI coding agents may introduce changes that need to be tested, compared, or reverted.
+
+\subsection{Commit Strategy}
+
+Each completed modular task should receive its own commit.
+
+Examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Base project setup
+    \item Orange free movement
+    \item Contextual action system
+    \item Fragment collection
+    \item Save after reward
+    \item Mushroom puzzle prototype
+\end{itemize}
+
+The version control rule is:
+
+\begin{center}
+\textbf{One task, one commit.}
+\end{center}
+
+\section{Testing Strategy}
+
+\subsection{Testing Approach}
+
+The selected testing strategy is:
+
+\begin{center}
+\textbf{Small playtest group}
+\end{center}
+
+Testing should happen in two stages.
+
+\subsection{Stage 1: Solo Testing}
+
+The developer should test every modular task personally before moving to the next module.
+
+Testing questions:
+
+\begin{itemize}[leftmargin=*]
+    \item Does the module work alone?
+    \item Does it break previous modules?
+    \item Is the interaction simple?
+    \item Does the player understand what to do?
+    \item Is the result saved correctly?
+\end{itemize}
+
+\subsection{Stage 2: Small Playtest Group}
+
+After Episode 1 plus the Episode 2 bridge becomes playable, a small trusted group should test it.
+
+Playtest questions:
+
+\begin{itemize}[leftmargin=*]
+    \item Did movement feel easy?
+    \item Did you understand what to tap or click?
+    \item Did the puzzles feel fair?
+    \item Did the hint help without solving everything?
+    \item Did the Secret Map Card feel meaningful?
+    \item Did the game feel cozy?
+    \item Were any objects visually confusing?
+    \item Did the Episode 2 bridge feel exciting?
+\end{itemize}
+
+The testing rule is:
+
+\begin{center}
+\textbf{Playtest for clarity first, beauty second.}
+\end{center}
+
+\section{Final Technical Direction Summary}
+
+The current official direction for \textit{Orange} is:
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Engine:} Godot 4.x
+    \item \textbf{Language:} GDScript
+    \item \textbf{First platform:} responsive web
+    \item \textbf{Orientation:} landscape first
+    \item \textbf{Resolution:} responsive scaling
+    \item \textbf{Visual style:} medium-detail cozy soft pixel art
+    \item \textbf{Camera:} isometric
+    \item \textbf{Character style:} chibi isometric
+    \item \textbf{Lighting:} pixel-art sprites with soft lighting and effects
+    \item \textbf{Animation:} moderate animation
+    \item \textbf{Movement:} free tap/click movement
+    \item \textbf{Interaction:} contextual one-button action
+    \item \textbf{UI:} minimal cozy UI with pixel notebook flavor
+    \item \textbf{Hint system:} one-level gentle hint
+    \item \textbf{Dialogue:} fictional Orange language with English bottom text
+    \item \textbf{Object text:} floating minimal labels
+    \item \textbf{Sound:} nature ambience with gentle music
+    \item \textbf{Music:} changes by episode environment and feeling
+    \item \textbf{Map style:} hybrid isometric maps
+    \item \textbf{Map size:} medium maps with 3 to 4 connected zones
+    \item \textbf{Transitions:} smooth movement inside zones, soft transitions between zones
+    \item \textbf{Puzzle system:} hybrid reusable base with custom puzzle logic
+    \item \textbf{Inventory:} very small fixed key item system
+    \item \textbf{Fragment system:} manual collection
+    \item \textbf{Save system:} save after every puzzle reward
+    \item \textbf{Data structure:} JSON for narrative text, Godot Resources for gameplay data
+    \item \textbf{Art tool:} Aseprite first
+    \item \textbf{Support tools:} Blender for blockouts and lighting reference, Krita optional later
+    \item \textbf{Workflow:} small modular AI-assisted tasks
+    \item \textbf{Version control:} Git + GitHub from the beginning
+    \item \textbf{Testing:} small playtest group after prototype
+    \item \textbf{Prototype scope:} Episode 1 plus Episode 2 bridge
+\end{itemize}
+
+\section{Final Production Statement}
+
+\textit{Orange} should be built as a modular, solo-developed, AI-assisted cozy puzzle adventure. The project should remain technically simple but emotionally intentional.
+
+The strongest development direction is not to build everything at once. The strongest direction is to build a small, playable, charming prototype that proves the core loop:
+
+\begin{center}
+\textbf{Explore} $\rightarrow$
+\textbf{notice nature data} $\rightarrow$
+\textbf{solve puzzle} $\rightarrow$
+\textbf{collect fragment} $\rightarrow$
+\textbf{complete key item} $\rightarrow$
+\textbf{use key item in the next episode}
+\end{center}
+
+For the first prototype, the most important proof is:
+
+\begin{center}
+\textbf{Episode 1 creates the Secret Map Card, and the Episode 2 bridge proves that the card matters.}
+\end{center}
+
+\end{document}

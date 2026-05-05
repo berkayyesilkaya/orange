@@ -1,0 +1,633 @@
+\documentclass[12pt]{article}
+
+\usepackage[a4paper, margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\setstretch{1.2}
+
+\titleformat{\section}
+  {\large\bfseries}
+  {\thesection.}
+  {0.5em}
+  {}
+
+\titleformat{\subsection}
+  {\normalsize\bfseries}
+  {\thesubsection.}
+  {0.5em}
+  {}
+
+\title{\textbf{Orange}\\
+\large Forest Episodes Structure - Story and Puzzle Logic Design}
+\author{Creative Game Design Department \& Product Department}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Project Overview}
+
+\textit{Orange} is a pixel-art puzzle adventure game centered around a curly orange-haired girl named Orange. The first major story arc takes place in a forest environment and contains three connected episodes. Each episode is built around a combination of place, natural phenomenon, and emotional theme.
+
+The core design direction of the forest arc is based on mixed data. This means that each episode uses real nature-inspired observations, but these observations are stylized into poetic puzzle rules. The world of \textit{Orange} does not treat nature data as dry information. Instead, it turns weather, movement, growth, sound, and light into emotional and interactive clues.
+
+Each episode contains several smaller puzzle sections. Every puzzle rewards the player with one illustration fragment. When all fragments are collected, they form a complete image. This complete image becomes the key item or key event needed to progress.
+
+The first three episodes are designed as a connected forest journey:
+
+\begin{itemize}[leftmargin=*]
+    \item Episode 1 introduces the forest through rain and curiosity.
+    \item Episode 2 uses the map found in Episode 1 to reach a sunny waterfall area.
+    \item Episode 3 uses the compass gained in Episode 2 to follow a river toward the ancient tree and open a teleportation door.
+\end{itemize}
+
+\section{Forest Arc Structure}
+
+\subsection{Episode Chain}
+
+The forest arc follows a clear item progression:
+
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Episode 1:} Orange finds and completes the Secret Map Card.
+    \item \textbf{Episode 2:} Orange uses the Secret Map Card to reach the waterfall and completes the Mixed Compass.
+    \item \textbf{Episode 3:} Orange uses the Mixed Compass to follow the river, reach the Ancient Tree, and open the Teleportation Door.
+\end{enumerate}
+
+\subsection{Key Design Principle}
+
+Each episode must contain a strong bridge from the previous episode. The player should feel that every completed item matters beyond the episode where it was earned.
+
+The desired progression is:
+
+\begin{center}
+\textbf{Rain reveals the Map} $\rightarrow$
+\textbf{Sunlight activates the Map} $\rightarrow$
+\textbf{Compass follows the River} $\rightarrow$
+\textbf{Ancient Tree opens the Door}
+\end{center}
+
+\section{Episode 1: Rain-Found Forest}
+
+\subsection{Core Identity}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Place:} Forest
+    \item \textbf{Phenomenon:} Rain
+    \item \textbf{Emotion:} Curiosity
+    \item \textbf{Episode Key Item:} Secret Map Card
+\end{itemize}
+
+\subsection{Story Direction}
+
+Orange enters the forest during or shortly after a gentle rain. The forest feels quiet, wet, and alive. At first, the environment seems ordinary, but as Orange explores, she notices that the rain has revealed hidden information.
+
+The episode is built around the idea that rain does not hide the forest. It reveals it.
+
+Mud holds animal tracks. Mushrooms appear along damp paths. Wet bark shows symbols that were invisible before. Leaves and puddles create small rhythms. Orange begins to understand that the forest is communicating through signs created by rain.
+
+The emotional tone is curiosity. Orange is not scared of the forest. She is drawn deeper because every detail feels like a small secret waiting to be discovered.
+
+\subsection{Episode Objective}
+
+The player must solve several rain-based nature puzzles to collect illustration fragments. When assembled, these fragments form the \textbf{Secret Map Card}. This map shows the route to a hidden waterfall area, which becomes the setting of Episode 2.
+
+\subsection{Puzzle Logic 1: Mushroom Path Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Mushrooms often appear or become more visible after rain, especially in damp forest environments.
+
+\subsubsection{Stylized Game Logic}
+
+In the game world, mushroom clusters grow in meaningful patterns after rainfall. These clusters do not simply decorate the forest floor. They form a hidden path that Orange can read.
+
+\subsubsection{Player Action}
+
+The player observes groups of mushrooms with different sizes, colors, or cluster counts. The correct route is determined by identifying the natural sequence hidden in the mushroom pattern.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Follow mushroom clusters from smallest to largest.
+    \item Follow the side where orange-tinted mushrooms appear.
+    \item Count mushrooms in each cluster to determine path order.
+    \item Notice that mushrooms grow only beside the dampest stones.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the first illustration fragment of the Secret Map Card.
+
+\subsection{Puzzle Logic 2: Animal Tracks in Mud}
+
+\subsubsection{Nature Data Basis}
+
+Wet soil and mud preserve animal footprints more clearly than dry ground.
+
+\subsubsection{Stylized Game Logic}
+
+After the rain, several animals have crossed the path. Their footprints become a readable trail. Each animal type represents a different clue direction.
+
+\subsubsection{Player Action}
+
+The player studies tracks in the mud and chooses which trail to follow. Different animals can represent different meanings.
+
+Possible track logic:
+
+\begin{itemize}[leftmargin=*]
+    \item Small bird tracks point toward delicate clues.
+    \item Rabbit tracks move in repeated jumping patterns.
+    \item Deer tracks suggest a calm and safe direction.
+    \item Fox tracks may lead to a false but interesting route.
+\end{itemize}
+
+The player must identify which animal track matches the symbol or hint found nearby.
+
+\subsubsection{Reward}
+
+The puzzle rewards the second illustration fragment of the Secret Map Card.
+
+\subsection{Puzzle Logic 3: Raindrop Rhythm Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Rain creates different sounds when falling on leaves, puddles, hollow wood, and stones.
+
+\subsubsection{Stylized Game Logic}
+
+The forest has a rain rhythm. Certain objects repeat this rhythm, and Orange must listen or observe carefully to copy it.
+
+\subsubsection{Player Action}
+
+The player interacts with natural objects in the correct rhythm order.
+
+Example interaction objects:
+
+\begin{itemize}[leftmargin=*]
+    \item A broad leaf
+    \item A small puddle
+    \item A hollow log
+    \item A flat stone
+\end{itemize}
+
+The player repeats a short rhythm pattern, such as:
+
+\begin{center}
+Leaf $\rightarrow$ Puddle $\rightarrow$ Leaf $\rightarrow$ Log
+\end{center}
+
+This puzzle can be solved through sound, animation timing, or visual raindrop patterns.
+
+\subsubsection{Reward}
+
+The puzzle rewards the third illustration fragment of the Secret Map Card.
+
+\subsection{Puzzle Logic 4: Wet Bark Symbol Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Wet bark, moss, and stone surfaces can change appearance after rain. Patterns become darker, shinier, or more visible.
+
+\subsubsection{Stylized Game Logic}
+
+Some symbols on tree bark are invisible when dry. After rain, they appear as glowing or darkened marks.
+
+\subsubsection{Player Action}
+
+The player compares trees and identifies which bark symbols match the incomplete map fragments already collected.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Match bark marks to mushroom cluster shapes.
+    \item Rotate a fragment to align it with a wet symbol.
+    \item Find the only tree where moss and bark lines form an arrow.
+    \item Reveal a hidden waterfall icon on the final tree.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the final illustration fragment. When all fragments are assembled, the Secret Map Card is completed.
+
+\subsection{Episode 1 Completion}
+
+At the end of Episode 1, Orange assembles the map illustration. The completed image is a poetic map of a nearby waterfall area hidden deeper inside the forest.
+
+The map is not a simple navigation tool. It is a mysterious card that responds to natural conditions. At this stage, the player understands that the map will be important later, but its full function is not yet revealed.
+
+\section{Episode 2: Sunlit Waterfall}
+
+\subsection{Core Identity}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Place:} Waterfall inside the forest
+    \item \textbf{Phenomenon:} Bright sunny weather
+    \item \textbf{Emotion:} Hope
+    \item \textbf{Previous Key Item Used:} Secret Map Card
+    \item \textbf{Episode Key Item:} Mixed Compass
+\end{itemize}
+
+\subsection{Story Direction}
+
+Orange begins Episode 2 with the Secret Map Card from Episode 1. The card shows a hidden waterfall area, but the route is not immediately clear. The map contains marks that only appear when sunlight touches it from the correct angle.
+
+The tone of this episode is brighter and more hopeful. The rain of Episode 1 revealed hidden clues in the forest. Now sunlight gives those clues direction. Orange follows the activated map and arrives at a waterfall surrounded by mist, shining stones, flowing water, and plants growing near the riverbank.
+
+The episode is about hope as direction. The forest no longer feels like a place of secrets only. It becomes a place that helps Orange move forward.
+
+\subsection{Episode Objective}
+
+The player must use the Secret Map Card to reach the waterfall area and solve several light-and-water-based puzzles. The reward fragments form the \textbf{Mixed Compass}. This compass works as a normal compass, but it can also respond to feelings, hidden paths, and nature signs.
+
+\subsection{Opening Bridge Puzzle: Sunlit Map Activation}
+
+\subsubsection{Nature Data Basis}
+
+Sunlight direction changes how surfaces look. Shadows, reflections, and angles can reveal details that are not visible under flat light.
+
+\subsubsection{Stylized Game Logic}
+
+The Secret Map Card contains hidden ink or markings that appear only when sunlight hits the card correctly.
+
+\subsubsection{Player Action}
+
+The player must place Orange in a sunny forest spot and rotate or align the map card. Tree shadows and beams of sunlight act as guidance.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Align the map with the shadow of a branch.
+    \item Rotate the card until the waterfall icon appears.
+    \item Use sunbeams passing through leaves to reveal a dotted path.
+    \item Match the map direction with a bright gap in the trees.
+\end{itemize}
+
+\subsubsection{Outcome}
+
+The activated map reveals the correct route to the waterfall. This puzzle clearly connects Episode 1 to Episode 2.
+
+\subsection{Puzzle Logic 1: Sun Reflection Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Sunlight can reflect from wet stones, water surfaces, and shiny natural materials.
+
+\subsubsection{Stylized Game Logic}
+
+Near the waterfall, sunlight bounces from wet stones and water pools. The player must guide reflected light toward hidden forest symbols.
+
+\subsubsection{Player Action}
+
+The player rotates shiny stones, adjusts small reflective surfaces, or changes Orange's position to redirect light.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Reflect sunlight onto a carved symbol.
+    \item Connect three light points in the correct order.
+    \item Use the Secret Map Card as a reference for symbol placement.
+    \item Find which wet stone reflects an orange-tinted light beam.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the first illustration fragment of the Mixed Compass.
+
+\subsection{Puzzle Logic 2: Water Flow Path Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Water follows paths shaped by slope, rock position, and blocked channels.
+
+\subsubsection{Stylized Game Logic}
+
+Small streams around the waterfall can be redirected. When water reaches certain carved spots, the forest responds.
+
+\subsubsection{Player Action}
+
+The player moves pebbles, opens small channels, or blocks tiny streams to guide water flow.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Send water to three flower roots in the correct order.
+    \item Redirect a stream to fill a small stone basin.
+    \item Use map symbols to identify which channels should be active.
+    \item Balance water between two paths to reveal a hidden shape.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the second illustration fragment of the Mixed Compass.
+
+\subsection{Puzzle Logic 3: Mist Symbol Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Waterfall mist becomes more visible in sunlight and can create glowing or rainbow-like effects.
+
+\subsubsection{Stylized Game Logic}
+
+Symbols appear in the mist only when sunlight passes through water spray from a certain angle.
+
+\subsubsection{Player Action}
+
+The player observes where mist and sunlight overlap. Orange must stand in the correct place or adjust environmental objects to create the right mist-light combination.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Wait for a mist cloud to pass through a sunbeam.
+    \item Match a rainbow color order to nearby symbols.
+    \item Use the map card to identify which symbol belongs to the waterfall.
+    \item Reveal a compass marking inside the mist.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the third illustration fragment of the Mixed Compass.
+
+\subsection{Puzzle Logic 4: Rock Layer and Water Height Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Water changes rocks over time through erosion. Water level marks can show past flow patterns.
+
+\subsubsection{Stylized Game Logic}
+
+The rocks near the waterfall keep memory lines of past water levels. These lines form a hidden order.
+
+\subsubsection{Player Action}
+
+The player reads rock marks and arranges symbols or stones according to water height, flow strength, or erosion lines.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Place stones from lowest water mark to highest water mark.
+    \item Match erosion lines to shapes on the map card.
+    \item Identify which rock has been touched longest by water.
+    \item Use flow marks to determine the final compass direction.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the final illustration fragment. When all fragments are assembled, the Mixed Compass is completed.
+
+\subsection{Episode 2 Completion}
+
+At the end of Episode 2, Orange assembles the Mixed Compass. The compass has ordinary directional marks, but it also contains emotional and natural symbols. It can point north, but it can also react to hope, hidden routes, river flow, and forest signs.
+
+The compass becomes the bridge to Episode 3. As Orange leaves the waterfall area, the compass reacts to the river flowing away from the waterfall. The player understands that the river is the next path.
+
+\section{Episode 3: River to the Ancient Tree}
+
+\subsection{Core Identity}
+
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Place:} Deep forest, river path, ancient tree
+    \item \textbf{Phenomenon:} Wind
+    \item \textbf{Emotion:} Trust
+    \item \textbf{Previous Key Item Used:} Mixed Compass
+    \item \textbf{Forest Arc Completion Event:} Teleportation Door opens
+\end{itemize}
+
+\subsection{Story Direction}
+
+Episode 3 begins after Orange leaves the sunny waterfall. The water from the waterfall continues as a river, moving deeper into the forest. The Mixed Compass from Episode 2 begins to behave strangely near the river. It does not always point north. Sometimes it points with the wind. Sometimes it points toward moving leaves, unusual root shapes, or sounds carried through the trees.
+
+The emotional theme is trust. Orange must trust the compass, the river, the wind, and the strange language of the forest. Unlike Episode 1, where clues were discovered through curiosity, and Episode 2, where sunlight gave clear hope, Episode 3 is about following signs that are less direct.
+
+The destination is the Ancient Tree. This tree stands at the heart of the forest arc. Its roots connect with the river, its branches move with the wind, and its trunk holds the final forest symbols. When Orange solves the final sequence, the tree reveals or becomes a Teleportation Door.
+
+\subsection{Episode Objective}
+
+The player must follow the river using the Mixed Compass and solve wind, river, root, and branch puzzles. Instead of gaining another portable object, the episode ends with a major transition event: the \textbf{Teleportation Door} opens inside or near the Ancient Tree.
+
+\subsection{Opening Bridge Puzzle: Compass and River Reaction}
+
+\subsubsection{Nature Data Basis}
+
+Rivers follow terrain, and moving water can guide direction. Wind can also influence leaves, ripples, and floating objects.
+
+\subsubsection{Stylized Game Logic}
+
+The Mixed Compass reacts to the river because the river is connected to the waterfall from Episode 2. The compass needle shifts between real direction and emotional direction.
+
+\subsubsection{Player Action}
+
+The player follows the compass while comparing its behavior to the river flow. The correct route is not always the obvious path.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Follow the compass only when the river is calm.
+    \item Follow floating leaves when the compass spins.
+    \item Choose the river branch where the compass symbol glows.
+    \item Trust the compass when it points away from the visible path.
+\end{itemize}
+
+\subsubsection{Outcome}
+
+The river path leads Orange toward the deep forest and introduces the trust-based logic of the episode.
+
+\subsection{Puzzle Logic 1: Compass and Wind Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Wind direction can be observed through moving leaves, grass, branches, and drifting seeds.
+
+\subsubsection{Stylized Game Logic}
+
+The compass does not only point to location. It also responds to the feeling of trust. When Orange trusts the correct natural sign, the compass stabilizes.
+
+\subsubsection{Player Action}
+
+The player compares compass movement with leaf direction, branch motion, or drifting seeds.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Choose the path where leaves move against the compass needle.
+    \item Wait for wind to settle before reading the compass.
+    \item Match compass symbols with wind-carried leaves.
+    \item Follow the path where the compass and wind briefly agree.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the first illustration fragment related to the Teleportation Door.
+
+\subsection{Puzzle Logic 2: River Current Pattern Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Floating objects move according to water current, obstacles, and river shape.
+
+\subsubsection{Stylized Game Logic}
+
+The river carries leaves, petals, and tiny wooden pieces in repeating movement patterns. These patterns reveal an order that the player must read.
+
+\subsubsection{Player Action}
+
+The player observes how objects move through the river and uses the movement order to activate stones or symbols.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Watch floating leaves pass left, right, center, then left again.
+    \item Match river turns to symbols on nearby stones.
+    \item Identify which floating object reaches the Ancient Tree root first.
+    \item Use the compass to confirm the correct current branch.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the second illustration fragment related to the Teleportation Door.
+
+\subsection{Puzzle Logic 3: Ancient Root Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Tree roots grow around obstacles, follow moisture, and connect with soil and water sources. Tree rings can suggest age and environmental history.
+
+\subsubsection{Stylized Game Logic}
+
+The roots of the Ancient Tree form a living pattern. The roots respond to the river, the wind, and the compass.
+
+\subsubsection{Player Action}
+
+The player matches root shapes, tree marks, or ring patterns to the clues collected during the episode.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Match root paths with the river path taken earlier.
+    \item Align compass symbols with carved root symbols.
+    \item Order root marks by tree age rings.
+    \item Trace the root that touches both river water and wind-fallen leaves.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the third illustration fragment related to the Teleportation Door.
+
+\subsection{Puzzle Logic 4: Whispering Branches Puzzle}
+
+\subsubsection{Nature Data Basis}
+
+Wind moving through branches creates sound, rhythm, and visible motion.
+
+\subsubsection{Stylized Game Logic}
+
+The Ancient Tree speaks through branch movement. The final forest message is hidden in the rhythm of wind.
+
+\subsubsection{Player Action}
+
+The player listens to or observes branch movement and repeats the correct sequence through interaction.
+
+Possible logic examples:
+
+\begin{itemize}[leftmargin=*]
+    \item Activate branch symbols in the order they move.
+    \item Match rustling sounds to compass markings.
+    \item Use wind pauses to identify the correct timing.
+    \item Combine river rhythm and branch rhythm into the final sequence.
+\end{itemize}
+
+\subsubsection{Reward}
+
+The puzzle rewards the final illustration fragment. When assembled, the full image reveals the Teleportation Door hidden in the Ancient Tree.
+
+\subsection{Episode 3 Completion}
+
+At the end of Episode 3, Orange assembles the final illustration. The image shows the Ancient Tree as a doorway. The roots form the frame, the branches form the arch, and the river reflects the entrance.
+
+The Mixed Compass points directly at the tree. Wind moves through the branches, and the symbols from all three forest episodes briefly appear together:
+
+\begin{itemize}[leftmargin=*]
+    \item Rain marks from Episode 1
+    \item Sun and water marks from Episode 2
+    \item Wind and root marks from Episode 3
+\end{itemize}
+
+The Teleportation Door opens. This completes the forest arc and prepares the player for the next environment, which will be designed separately.
+
+\section{Forest Arc Puzzle Progression Summary}
+
+\subsection{Episode 1 Puzzle Theme}
+
+Episode 1 teaches the player to notice hidden details. The main logic is discovery through rain.
+
+\begin{itemize}[leftmargin=*]
+    \item Mushrooms reveal paths.
+    \item Mud reveals animal movement.
+    \item Rain creates rhythm.
+    \item Wet bark reveals symbols.
+\end{itemize}
+
+\subsection{Episode 2 Puzzle Theme}
+
+Episode 2 teaches the player to use direction, light, and flow. The main logic is hope through sunlight and water.
+
+\begin{itemize}[leftmargin=*]
+    \item Sunlight activates the old map.
+    \item Reflections reveal symbols.
+    \item Water flow activates carved points.
+    \item Mist and rock marks reveal compass fragments.
+\end{itemize}
+
+\subsection{Episode 3 Puzzle Theme}
+
+Episode 3 teaches the player to trust indirect signs. The main logic is trust through wind, river, roots, and compass behavior.
+
+\begin{itemize}[leftmargin=*]
+    \item Compass reacts to the river.
+    \item Wind changes directional meaning.
+    \item River currents reveal order.
+    \item Ancient roots and branches open the final doorway.
+\end{itemize}
+
+\section{Narrative and Item Continuity}
+
+The forest arc depends on strong continuity between episodes. Each episode must make the previous reward meaningful.
+
+\subsection{Continuity From Episode 1 to Episode 2}
+
+The Secret Map Card is not only the reward of Episode 1. It is required to begin Episode 2. Sunlight reveals the map's hidden waterfall route.
+
+\subsection{Continuity From Episode 2 to Episode 3}
+
+The Mixed Compass is not only the reward of Episode 2. It is required to follow the river in Episode 3. The compass reacts to the continuation of the waterfall and guides Orange toward the Ancient Tree.
+
+\subsection{Continuity Across the Full Forest Arc}
+
+The forest arc should feel like one connected journey:
+
+\begin{center}
+\textbf{Curiosity finds the map.}\\
+\textbf{Hope creates the compass.}\\
+\textbf{Trust opens the door.}
+\end{center}
+
+\section{Final Creative Direction}
+
+The first three episodes of \textit{Orange} should create a gentle but meaningful puzzle journey. The player should not feel that they are solving abstract puzzles placed randomly in a forest. Instead, every puzzle should feel like a natural behavior of the world.
+
+Rain, sunlight, water, wind, roots, mushrooms, tracks, and bark are not background decoration. They are the language of the forest.
+
+Orange's emotional journey should stay simple and readable:
+
+\begin{itemize}[leftmargin=*]
+    \item She becomes curious when rain reveals hidden things.
+    \item She becomes hopeful when sunlight gives direction.
+    \item She learns to trust when the forest asks her to follow uncertain signs.
+\end{itemize}
+
+The forest arc ends when Orange reaches the Ancient Tree and opens the Teleportation Door. This door is the conclusion of the first environment and the narrative bridge to the next part of the game.
+
+\end{document}
