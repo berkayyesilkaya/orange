@@ -31,3 +31,11 @@ renderer/rendering_method.mobile="gl_compatibility"
 textures/canvas_textures/default_texture_filter=0
 2d/snap/snap_2d_transforms_to_pixel=true
 2d/snap/snap_2d_vertices_to_pixel=true
+
+[autoload]
+
+Constants="*res://globals/constants.gd"
+EventBus="*res://globals/event_bus.gd"
+GameState="*res://globals/game_state.gd"
+SaveSystem="*res://globals/save_system.gd"
+EpisodeController="*res://globals/episode_controller.gd"
