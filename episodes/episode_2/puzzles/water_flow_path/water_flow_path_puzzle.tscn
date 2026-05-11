@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_2/puzzles/water_flow_path/water_flow_path_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_2/definitions/puzzle_water_flow.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_channel"]
+size = Vector2(64, 64)
+
+[node name="WaterFlowPathPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+definition = ExtResource("2_res")
+
+[node name="Channel1" type="Area2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.water_flow.channel_1"
+display_label = "Flow Channel"
+action_label = "Open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Channel1"]
+shape = SubResource("RectangleShape2D_channel")
+
+[node name="Channel2" type="Area2D" parent="."]
+position = Vector2(250, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.water_flow.channel_2"
+display_label = "Flow Channel"
+action_label = "Open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Channel2"]
+shape = SubResource("RectangleShape2D_channel")
+
+[node name="Channel3" type="Area2D" parent="."]
+position = Vector2(400, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.water_flow.channel_3"
+display_label = "Flow Channel"
+action_label = "Open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Channel3"]
+shape = SubResource("RectangleShape2D_channel")
+
+[node name="ConfirmFlow" type="Area2D" parent="."]
+position = Vector2(250, 120)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.water_flow.confirm"
+display_label = "Water Gate"
+action_label = "Send Water"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConfirmFlow"]
+shape = SubResource("RectangleShape2D_channel")
+
+[node name="FlowIndicator" type="Sprite2D" parent="."]
+position = Vector2(250, -80)

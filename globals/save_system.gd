@@ -63,6 +63,13 @@ func save() -> void:
 	file.close()
 
 
+## Deletes the save file and resets runtime state.
+func wipe() -> void:
+	if FileAccess.file_exists(SAVE_PATH):
+		DirAccess.remove_absolute(SAVE_PATH)
+	GameState.reset()
+
+
 ## Reads user://save.json and applies values to GameState (and KeyItemInventory
 ## via GameState, which KeyItemInventory reads in its own _ready/_restore).
 ## Returns true on success, false if the file is missing or unreadable.

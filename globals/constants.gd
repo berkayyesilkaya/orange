@@ -24,3 +24,21 @@ const ZONE_EP1_2: StringName = &"ep1.zone_2"
 const ZONE_EP1_3: StringName = &"ep1.zone_3"
 const ZONE_EP1_4: StringName = &"ep1.zone_4"
 const ZONE_EP2BRIDGE_SUNLIT: StringName = &"ep2bridge.zone_sunlit_clearing"
+
+# Episode 2 puzzle ids
+const PUZZLE_SUN_REFLECTION: StringName = &"ep2.sun_reflection"
+const PUZZLE_WATER_FLOW:     StringName = &"ep2.water_flow"
+const PUZZLE_MIST_SYMBOL:    StringName = &"ep2.mist_symbol"
+const PUZZLE_ROCK_WATER:     StringName = &"ep2.rock_water"
+
+# Episode 2 fragment ids (belong to the Mixed Compass)
+const FRAG_COMPASS_1: StringName = &"ep2.compass.frag_1"
+const FRAG_COMPASS_2: StringName = &"ep2.compass.frag_2"
+const FRAG_COMPASS_3: StringName = &"ep2.compass.frag_3"
+const FRAG_COMPASS_4: StringName = &"ep2.compass.frag_4"
+
+# Episode 2 zone ids
+const ZONE_EP2_1: StringName = &"ep2.zone_1"
+const ZONE_EP2_2: StringName = &"ep2.zone_2"
+const ZONE_EP2_3: StringName = &"ep2.zone_3"
+const ZONE_EP2_4: StringName = &"ep2.zone_4"

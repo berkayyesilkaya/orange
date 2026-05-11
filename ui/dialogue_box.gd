@@ -54,6 +54,7 @@ func show_text(text: String, duration: float = 3.0) -> void:
 const _DIALOGUE_FILES: Array[String] = [
 	"res://data/dialogue/episode_1.json",
 	"res://data/dialogue/episode_2_bridge.json",
+	"res://data/dialogue/episode_2.json",
 ]
 
 func _load_dialogue() -> void:

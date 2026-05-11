@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_2/puzzles/rock_water/rock_water_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_2/definitions/puzzle_rock_water.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mark"]
+size = Vector2(48, 24)
+
+[node name="RockWaterPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+definition = ExtResource("2_res")
+
+; Mark A — lowest (oldest water level)
+[node name="MarkA" type="Area2D" parent="."]
+position = Vector2(400, 200)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.rock_water.mark_a"
+display_label = "Erosion Mark"
+action_label = "Touch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarkA"]
+shape = SubResource("RectangleShape2D_mark")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarkA"]
+modulate = Color(0.7, 0.55, 0.4, 1)
+
+[node name="MarkB" type="Area2D" parent="."]
+position = Vector2(400, 100)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.rock_water.mark_b"
+display_label = "Erosion Mark"
+action_label = "Touch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarkB"]
+shape = SubResource("RectangleShape2D_mark")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarkB"]
+modulate = Color(0.7, 0.55, 0.4, 1)
+
+[node name="MarkC" type="Area2D" parent="."]
+position = Vector2(400, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.rock_water.mark_c"
+display_label = "Erosion Mark"
+action_label = "Touch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarkC"]
+shape = SubResource("RectangleShape2D_mark")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarkC"]
+modulate = Color(0.7, 0.55, 0.4, 1)
+
+; Mark D — highest (most recent water level)
+[node name="MarkD" type="Area2D" parent="."]
+position = Vector2(400, -100)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.rock_water.mark_d"
+display_label = "Erosion Mark"
+action_label = "Touch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MarkD"]
+shape = SubResource("RectangleShape2D_mark")
+
+[node name="Sprite2D" type="Sprite2D" parent="MarkD"]
+modulate = Color(0.7, 0.55, 0.4, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
 [ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
@@ -8,17 +8,18 @@
 [ext_resource type="Script" path="res://interaction/interaction_manager.gd" id="6"]
 [ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://episodes/episode_2_bridge/puzzles/sunlit_map_activation/sunlit_map_activation_puzzle.tscn" id="9_puzzle"]
+[ext_resource type="Script" path="res://episodes/zone_exit.gd" id="9"]
+[ext_resource type="PackedScene" path="res://episodes/episode_2/puzzles/mist_symbol/mist_symbol_puzzle.tscn" id="10_puzzle"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
 size = Vector2(2560, 1440)
 
-; Sunlit clearing — Episode 2 Bridge zone.
-; No exit trigger: after the puzzle solves, SunlitMapActivationPuzzle itself
-; emits key_item_used; P28 adds the route-reveal cinematic and graceful end.
-[node name="ZoneSunlitClearing" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(64, 400)
+
+[node name="Zone3MistPool" type="Node2D"]
 script = ExtResource("1")
-zone_id = &"ep2bridge.zone_sunlit_clearing"
+zone_id = &"ep2.zone_3"
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -29,8 +30,16 @@ shape = SubResource("RectangleShape2D_walkable")
 
 [node name="Interactables" type="Node2D" parent="."]
 
-[node name="SunlitMapActivationPuzzle" parent="Interactables" instance=ExtResource("9_puzzle")]
-position = Vector2(700, 720)
+[node name="MistSymbolPuzzle" parent="Interactables" instance=ExtResource("10_puzzle")]
+position = Vector2(600, 720)
+
+[node name="ExitToZone4" type="Area2D" parent="."]
+position = Vector2(1280, 0)
+script = ExtResource("9")
+target_zone_id = &"ep2.zone_4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToZone4"]
+shape = SubResource("RectangleShape2D_exit")
 
 [node name="OrangeCharacter" parent="." instance=ExtResource("2")]
 
@@ -48,4 +57,3 @@ target_path = NodePath("../OrangeCharacter")
 [node name="InteractionManager" type="Node" parent="."]
 script = ExtResource("6")
 orange = NodePath("OrangeCharacter")
-

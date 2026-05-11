@@ -1,0 +1,16 @@
+{
+  "ep2.entry":                { "orange": "Muu ruu wa!",    "english": "This is the place. Light and water, together." },
+  "ep2.sun_reflection_intro": { "orange": "Ruu shini?",     "english": "The stones are catching the light." },
+  "ep2.sun_reflection_wrong": { "orange": "Mimi...",        "english": "The light went the wrong way." },
+  "ep2.sun_reflection_solved":{ "orange": "Waa! Ruu mii!", "english": "The symbol is glowing. The compass remembers this." },
+  "ep2.water_flow_intro":     { "orange": "Ru ru ru...",    "english": "The water wants to go somewhere." },
+  "ep2.water_flow_wrong":     { "orange": "Mimi ruu?",      "english": "That path leads the water astray." },
+  "ep2.water_flow_solved":    { "orange": "Wa ruu!",        "english": "The flowers are drinking. They know the compass." },
+  "ep2.mist_symbol_intro":    { "orange": "Miii...",        "english": "Something is hiding in the mist." },
+  "ep2.mist_symbol_wrong":    { "orange": "Muu...",         "english": "That symbol is different." },
+  "ep2.mist_symbol_solved":   { "orange": "Ruu wa!",        "english": "I found it. The mist keeps its secrets well." },
+  "ep2.rock_water_intro":     { "orange": "Ru mimi?",       "english": "These marks remember how high the water climbed." },
+  "ep2.rock_water_wrong":     { "orange": "Muu ruu.",       "english": "The water didn't climb in that order." },
+  "ep2.rock_water_solved":    { "orange": "Wa ruu wa!",     "english": "The rocks told me everything. The compass is almost ready." },
+  "ep2.compass_completed":    { "orange": "RUUU!",          "english": "The compass is whole. The river is waiting." }
+}

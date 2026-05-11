@@ -126,6 +126,7 @@ func _show_floating_label(interactable: Interactable) -> void:
 const _LABEL_PATHS: Array[String] = [
 	"res://data/floating_labels/episode_1.json",
 	"res://data/floating_labels/episode_2_bridge.json",
+	"res://data/floating_labels/episode_2.json",
 ]
 
 ## Allows external nodes (e.g. MapCompletionTrigger) to block interaction

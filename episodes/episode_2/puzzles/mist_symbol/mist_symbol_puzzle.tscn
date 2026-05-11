@@ -1,0 +1,70 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_2/puzzles/mist_symbol/mist_symbol_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_2/definitions/puzzle_mist_symbol.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_panel"]
+size = Vector2(64, 64)
+
+[node name="MistSymbolPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+definition = ExtResource("2_res")
+
+[node name="PanelA" type="Area2D" parent="."]
+position = Vector2(50, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.mist_symbol.panel_a"
+display_label = "Mist Panel"
+action_label = "Examine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelA"]
+shape = SubResource("RectangleShape2D_panel")
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelA"]
+modulate = Color(1, 0.3, 0.3, 1)
+
+[node name="PanelB" type="Area2D" parent="."]
+position = Vector2(200, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.mist_symbol.panel_b"
+display_label = "Mist Panel"
+action_label = "Examine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelB"]
+shape = SubResource("RectangleShape2D_panel")
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelB"]
+modulate = Color(0.3, 1, 0.3, 1)
+
+[node name="PanelC" type="Area2D" parent="."]
+position = Vector2(350, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.mist_symbol.panel_c"
+display_label = "Mist Panel"
+action_label = "Examine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelC"]
+shape = SubResource("RectangleShape2D_panel")
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelC"]
+modulate = Color(0.3, 0.5, 1, 1)
+
+[node name="PanelD" type="Area2D" parent="."]
+position = Vector2(500, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.mist_symbol.panel_d"
+display_label = "Mist Panel"
+action_label = "Examine"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PanelD"]
+shape = SubResource("RectangleShape2D_panel")
+
+[node name="Sprite2D" type="Sprite2D" parent="PanelD"]
+modulate = Color(1, 1, 0.3, 1)
+
+; ReferenceSymbol is a plain Sprite2D — NOT an Interactable — so it has no
+; collision shape and InteractionManager will never show an action button for it.
+[node name="ReferenceSymbol" type="Sprite2D" parent="."]
+position = Vector2(350, -100)
+modulate = Color(0.3, 0.5, 1, 1)

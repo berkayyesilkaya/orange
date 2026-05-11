@@ -107,6 +107,7 @@ func _on_fragment_collected(fragment_id: StringName, key_item_id: StringName) ->
 const _EPISODE_DEF_PATHS: Dictionary = {
 	"ep1":       "res://episodes/episode_1/definitions",
 	"ep2bridge": "res://episodes/episode_2_bridge/definitions",
+	"ep2":       "res://episodes/episode_2/definitions",
 }
 
 ## Looks up the frame_slot for a given fragment_id by scanning PuzzleDefinition

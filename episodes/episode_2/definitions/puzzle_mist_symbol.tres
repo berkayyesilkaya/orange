@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PuzzleDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="1_frag"]
+[ext_resource type="Script" path="res://puzzles/puzzle_definition.gd" id="2_def"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("1_frag")
+fragment_id = &"ep2.compass.frag_3"
+key_item_id = &"key.mixed_compass"
+frame_slot = 2
+art_path = "res://art/compass_frag_3.png"
+
+[resource]
+script = ExtResource("2_def")
+puzzle_id = &"ep2.mist_symbol"
+display_name = "Mist Symbol"
+episode_id = &"ep2"
+fragment_reward = SubResource("Resource_reward")
+hint_text_key = &""
+intro_dialogue_key = &"ep2.mist_symbol_intro"
+solved_dialogue_key = &"ep2.mist_symbol_solved"

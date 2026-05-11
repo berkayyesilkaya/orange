@@ -12,6 +12,8 @@ func _ready() -> void:
 		# without requiring EpisodeController to call set_episode() explicitly.
 		if str(zone_id).begins_with("ep2bridge"):
 			GameState.current_episode = &"ep2bridge"
+		elif str(zone_id).begins_with("ep2."):
+			GameState.current_episode = &"ep2"
 		elif str(zone_id).begins_with("ep1"):
 			GameState.current_episode = &"ep1"
 	_setup_hud()

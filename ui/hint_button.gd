@@ -4,6 +4,7 @@ extends TextureButton
 const _HINT_PATHS: Array[String] = [
 	"res://data/hints/episode_1.json",
 	"res://data/hints/episode_2_bridge.json",
+	"res://data/hints/episode_2.json",
 ]
 
 var _current_puzzle_id: StringName = &""

@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_2/puzzles/sun_reflection/sun_reflection_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_2/definitions/puzzle_sun_reflection.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stone"]
+size = Vector2(64, 64)
+
+[node name="SunReflectionPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+definition = ExtResource("2_res")
+
+[node name="Stone1" type="Area2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.sun_reflection.stone_1"
+display_label = "Reflective Stone"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stone1"]
+shape = SubResource("RectangleShape2D_stone")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stone1"]
+
+[node name="Stone2" type="Area2D" parent="."]
+position = Vector2(250, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.sun_reflection.stone_2"
+display_label = "Reflective Stone"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stone2"]
+shape = SubResource("RectangleShape2D_stone")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stone2"]
+
+[node name="Stone3" type="Area2D" parent="."]
+position = Vector2(400, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2.sun_reflection.stone_3"
+display_label = "Reflective Stone"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Stone3"]
+shape = SubResource("RectangleShape2D_stone")
+
+[node name="Sprite2D" type="Sprite2D" parent="Stone3"]
+
+[node name="TargetSymbol" type="Sprite2D" parent="."]
+position = Vector2(250, -100)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
 [ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
@@ -8,17 +8,29 @@
 [ext_resource type="Script" path="res://interaction/interaction_manager.gd" id="6"]
 [ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
-[ext_resource type="PackedScene" path="res://episodes/episode_2_bridge/puzzles/sunlit_map_activation/sunlit_map_activation_puzzle.tscn" id="9_puzzle"]
+[ext_resource type="PackedScene" path="res://episodes/episode_2/puzzles/rock_water/rock_water_puzzle.tscn" id="9_puzzle"]
+[ext_resource type="PackedScene" path="res://ui/ep2_end_card.tscn" id="10_end"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
 size = Vector2(2560, 1440)
 
-; Sunlit clearing — Episode 2 Bridge zone.
-; No exit trigger: after the puzzle solves, SunlitMapActivationPuzzle itself
-; emits key_item_used; P28 adds the route-reveal cinematic and graceful end.
-[node name="ZoneSunlitClearing" type="Node2D"]
+[sub_resource type="GDScript" id="GDScript_trigger"]
+script/source = "extends Node
+
+func _ready() -> void:
+	EventBus.key_item_completed.connect(_on_key_item_completed)
+
+func _on_key_item_completed(key_item_id: StringName) -> void:
+	if key_item_id != &\"key.mixed_compass\":
+		return
+	var btn := get_parent().get_node_or_null(\"ActionButton\")
+	if is_instance_valid(btn):
+		btn.hide()
+"
+
+[node name="Zone4RockFace" type="Node2D"]
 script = ExtResource("1")
-zone_id = &"ep2bridge.zone_sunlit_clearing"
+zone_id = &"ep2.zone_4"
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -29,8 +41,8 @@ shape = SubResource("RectangleShape2D_walkable")
 
 [node name="Interactables" type="Node2D" parent="."]
 
-[node name="SunlitMapActivationPuzzle" parent="Interactables" instance=ExtResource("9_puzzle")]
-position = Vector2(700, 720)
+[node name="RockWaterPuzzle" parent="Interactables" instance=ExtResource("9_puzzle")]
+position = Vector2(600, 720)
 
 [node name="OrangeCharacter" parent="." instance=ExtResource("2")]
 
@@ -49,3 +61,10 @@ target_path = NodePath("../OrangeCharacter")
 script = ExtResource("6")
 orange = NodePath("OrangeCharacter")
 
+[node name="CompletionTrigger" type="Node" parent="."]
+script = SubResource("GDScript_trigger")
+
+[node name="Ep2CompletionLayer" type="CanvasLayer" parent="."]
+layer = 64
+
+[node name="Ep2EndCard" parent="Ep2CompletionLayer" instance=ExtResource("10_end")]

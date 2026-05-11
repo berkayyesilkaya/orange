@@ -25,6 +25,10 @@ const _ZONE_PATHS: Dictionary = {
 	&"ep1.zone_3":                   "res://episodes/episode_1/zones/zone_3_muddy_path.tscn",
 	&"ep1.zone_4":                   "res://episodes/episode_1/zones/zone_4_bark_clearing.tscn",
 	&"ep2bridge.zone_sunlit_clearing": "res://episodes/episode_2_bridge/zones/zone_sunlit_clearing.tscn",
+	&"ep2.zone_1": "res://episodes/episode_2/zones/zone_1_waterfall_entry.tscn",
+	&"ep2.zone_2": "res://episodes/episode_2/zones/zone_2_upper_stream.tscn",
+	&"ep2.zone_3": "res://episodes/episode_2/zones/zone_3_mist_pool.tscn",
+	&"ep2.zone_4": "res://episodes/episode_2/zones/zone_4_rock_face.tscn",
 }
 
 # ---------------------------------------------------------------------------
@@ -33,6 +37,7 @@ const _ZONE_PATHS: Dictionary = {
 const _EPISODE_KEY_ITEMS: Dictionary = {
 	&"ep1":       "res://key_items/secret_map_card.tres",
 	&"ep2bridge": "res://key_items/mixed_compass.tres",
+	&"ep2":       "res://key_items/mixed_compass.tres",
 }
 
 var current_episode_id: StringName = &"ep1"
@@ -56,6 +61,7 @@ func _ready() -> void:
 
 	# 2. Subscribe to global signals.
 	EventBus.zone_change_requested.connect(_on_zone_change_requested)
+	EventBus.key_item_used.connect(_on_key_item_used)
 	# 3. Boot the persistent SoftTransition overlay.
 	_boot_soft_transition()
 	# 4. Watch the scene tree so we can mount MiniFrame whenever a Hud appears.
@@ -76,6 +82,15 @@ func set_episode(episode_id: StringName) -> void:
 # ---------------------------------------------------------------------------
 # Signal handlers
 # ---------------------------------------------------------------------------
+
+func _on_key_item_used(key_item_id: StringName, context: StringName) -> void:
+	if key_item_id == Constants.KEY_SECRET_MAP_CARD and context == &"sunlit_clearing":
+		var path := zone_path_for_id(Constants.ZONE_EP2_1)
+		if path.is_empty():
+			push_error("EpisodeController: ep2.zone_1 path not registered.")
+			return
+		EventBus.zone_change_requested.emit(path)
+
 
 func _on_zone_change_requested(zone_path: String) -> void:
 	if not ResourceLoader.exists(zone_path):
@@ -113,6 +128,8 @@ func _on_node_added(node: Node) -> void:
 		var zid := str((node as Zone).zone_id)
 		if zid.begins_with("ep2bridge"):
 			set_episode(&"ep2bridge")
+		elif zid.begins_with("ep2."):   # dot avoids matching "ep2bridge"
+			set_episode(&"ep2")
 		elif zid.begins_with("ep1"):
 			set_episode(&"ep1")
 

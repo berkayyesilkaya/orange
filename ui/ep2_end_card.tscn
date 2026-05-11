@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/ep2_end_card.gd" id="1_scr"]
+
+[node name="Ep2EndCard" type="Control"]
+script = ExtResource("1_scr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+
+; Dark overlay
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.05, 0.05, 0.07, 0.85)
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Content" type="VBoxContainer" parent="CenterContainer"]
+alignment = 1
+
+[node name="OrangeLine" type="Label" parent="CenterContainer/Content"]
+custom_minimum_size = Vector2(600, 0)
+text = "RUUU!"
+horizontal_alignment = 1
+
+[node name="EnglishLine" type="Label" parent="CenterContainer/Content"]
+custom_minimum_size = Vector2(600, 0)
+text = "The compass is ready. The river awaits.
+
+To be continued."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="CenterContainer/Content"]
+custom_minimum_size = Vector2(0, 48)
+
+[node name="PlayAgainButton" type="Button" parent="CenterContainer/Content"]
+text = "Play Again"
+size_flags_horizontal = 4
+
+; Confirmation panel — hidden by default
+[node name="ConfirmPanel" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -80.0
+offset_right = 160.0
+offset_bottom = 80.0
+visible = false
+
+[node name="VBox" type="VBoxContainer" parent="ConfirmPanel"]
+alignment = 1
+
+[node name="ConfirmLabel" type="Label" parent="ConfirmPanel/VBox"]
+text = "Erase save and play again?"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="ConfirmPanel/VBox"]
+alignment = 1
+
+[node name="YesButton" type="Button" parent="ConfirmPanel/VBox/Buttons"]
+text = "Yes, again"
+
+[node name="NoButton" type="Button" parent="ConfirmPanel/VBox/Buttons"]
+text = "No, stay"
