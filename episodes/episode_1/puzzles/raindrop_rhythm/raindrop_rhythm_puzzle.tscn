@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_1/puzzles/raindrop_rhythm/raindrop_rhythm_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_1/definitions/puzzle_raindrop_rhythm.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obj"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_obj"]
+size = Vector2(64, 64)
+
+[node name="RaindropRhythmPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+pattern = Array[StringName]([&"leaf", &"puddle", &"leaf", &"log"])
+definition = ExtResource("2_res")
+
+[node name="DemoTimer" type="Timer" parent="."]
+wait_time = 6.0
+autostart = true
+
+[node name="ObjLeaf" type="Area2D" parent="."]
+position = Vector2(-150, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.raindrop.leaf"
+display_label = "Leaf"
+action_label = "Tap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjLeaf"]
+shape = SubResource("RectangleShape2D_obj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjLeaf"]
+texture = SubResource("PlaceholderTexture2D_obj")
+modulate = Color(0.2, 0.8, 0.2, 1)
+
+[node name="ObjPuddle" type="Area2D" parent="."]
+position = Vector2(-50, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.raindrop.puddle"
+display_label = "Puddle"
+action_label = "Tap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjPuddle"]
+shape = SubResource("RectangleShape2D_obj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjPuddle"]
+texture = SubResource("PlaceholderTexture2D_obj")
+modulate = Color(0.2, 0.4, 0.8, 1)
+
+[node name="ObjLog" type="Area2D" parent="."]
+position = Vector2(50, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.raindrop.log"
+display_label = "Log"
+action_label = "Tap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjLog"]
+shape = SubResource("RectangleShape2D_obj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjLog"]
+texture = SubResource("PlaceholderTexture2D_obj")
+modulate = Color(0.6, 0.4, 0.2, 1)
+
+[node name="ObjStone" type="Area2D" parent="."]
+position = Vector2(150, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.raindrop.stone"
+display_label = "Stone"
+action_label = "Tap"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObjStone"]
+shape = SubResource("RectangleShape2D_obj")
+
+[node name="Sprite2D" type="Sprite2D" parent="ObjStone"]
+texture = SubResource("PlaceholderTexture2D_obj")
+modulate = Color(0.5, 0.5, 0.5, 1)
+
+[connection signal="timeout" from="DemoTimer" to="." method="_on_demo_timer_timeout"]

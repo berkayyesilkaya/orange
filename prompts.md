@@ -1065,6 +1065,30 @@ PXX prompt:
 
 ## Prompt 16 — Manual Illustration Fragment Collection System
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P16
 - **Module name:** Fragment Pickup
 - **Goal:** When a puzzle is solved, an illustration fragment appears in the world. The player must walk Orange to it and tap to collect.
@@ -1099,6 +1123,30 @@ PXX prompt:
 
 ## Prompt 17 — Mini Picture Frame Progress UI
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P17
 - **Module name:** Mini Frame
 - **Goal:** Show progress on the current key item as a small picture frame that fills as fragments are collected.
@@ -1130,6 +1178,30 @@ PXX prompt:
 
 ## Prompt 18 — Very Small Fixed Key Item System
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P18
 - **Module name:** Key Item Inventory
 - **Goal:** Maintain a tiny fixed inventory of story-critical key items (Secret Map Card, Mixed Compass).
@@ -1160,6 +1232,30 @@ PXX prompt:
 ---
 
 ## Prompt 19 — Save System After Every Puzzle Reward
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P19
 - **Module name:** Save System
@@ -1193,6 +1289,30 @@ PXX prompt:
 ---
 
 ## Prompt 20 — Episode Controller
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P20
 - **Module name:** Episode Controller
@@ -1228,6 +1348,30 @@ PXX prompt:
 
 ## Prompt 21 — Episode 1 Zone Structure
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P21
 - **Module name:** Episode 1 Zones
 - **Goal:** Build the four Episode 1 zones using the zone template (P07) with placeholder visuals.
@@ -1257,6 +1401,30 @@ PXX prompt:
 ---
 
 ## Prompt 22 — Mushroom Path Puzzle Prototype
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P22
 - **Module name:** Episode 1 Puzzle 1 — Mushroom Path
@@ -1290,6 +1458,30 @@ PXX prompt:
 
 ## Prompt 23 — Animal Tracks Puzzle Prototype
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P23
 - **Module name:** Episode 1 Puzzle 2 — Animal Tracks
 - **Goal:** Implement the animal tracks puzzle: choose the correct trail (rabbit, deer, fox, bird) based on a nearby symbol/hint.
@@ -1319,6 +1511,30 @@ PXX prompt:
 ---
 
 ## Prompt 24 — Raindrop Rhythm Puzzle Prototype
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P24
 - **Module name:** Episode 1 Puzzle 3 — Raindrop Rhythm
@@ -1351,6 +1567,30 @@ PXX prompt:
 
 ## Prompt 25 — Wet Bark Symbol Puzzle Prototype
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P25
 - **Module name:** Episode 1 Puzzle 4 — Wet Bark Symbol
 - **Goal:** Match wet bark symbols on three trees to a target shape derived from earlier fragments (rotation puzzle).
@@ -1382,6 +1622,30 @@ PXX prompt:
 
 ## Prompt 26 — Secret Map Card Assembly and Completion
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P26
 - **Module name:** Secret Map Card Completion
 - **Goal:** When all 4 Episode 1 fragments are collected, the mini frame fills, `key_item_completed(&"key.secret_map_card")` fires, and a short cinematic moment plays (zoom on frame + dialogue line).
@@ -1408,6 +1672,30 @@ PXX prompt:
 ---
 
 ## Prompt 27 — Episode 2 Sunlight Map Activation Bridge
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P27
 - **Module name:** Episode 2 Bridge — Sunlit Map Activation
@@ -1446,6 +1734,30 @@ PXX prompt:
 
 ## Prompt 28 — Soft Zone Transition and Prototype Ending Card
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P28
 - **Module name:** Soft Transitions & Ending Card
 - **Goal:** Provide a reusable soft fade transition between zones and a final "prototype end" card after the bridge succeeds.
@@ -1479,6 +1791,30 @@ PXX prompt:
 
 ## Prompt 29 — Responsive Web Export Check
 
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
+
 - **Prompt ID:** P29
 - **Module name:** Web Export Validation
 - **Goal:** Configure and validate a Godot 4.x web export of the prototype.
@@ -1509,6 +1845,30 @@ PXX prompt:
 ---
 
 ## Prompt 30 — Final Prototype Integration Pass
+
+Read the workspace documentation first:
+- CLAUDE.md
+- prompts.md
+- docs/ai/PROMPTS_CLARIFICATIONS.md
+- docs/ai/ARCHITECTURE.md
+- docs/ai/TECHNICAL_RULES.md
+
+Implement ONLY the PXX prompt pasted below.
+
+Do not implement future prompts.
+Do not change architecture, autoload names, signal names, folder structure, or ids.
+Do not edit files outside the prompt scope unless required, and explain why.
+Use Godot 4.x + GDScript only.
+Keep the implementation minimal, modular, and testable.
+
+At the end, report:
+- files created/edited
+- what changed
+- manual test steps
+- acceptance criteria status
+- suggested git commit message
+
+PXX prompt:
 
 - **Prompt ID:** P30
 - **Module name:** Integration & Polish Pass

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="PuzzleDefinition" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="1_frag"]
+[ext_resource type="Script" path="res://puzzles/puzzle_definition.gd" id="2_def"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("1_frag")
+fragment_id = &"ep1.map.frag_3"
+key_item_id = &"key.secret_map_card"
+frame_slot = 2
+art_path = ""
+
+[resource]
+script = ExtResource("2_def")
+puzzle_id = &"ep1.raindrop_rhythm"
+display_name = "Raindrop Rhythm"
+episode_id = &"ep1"
+fragment_reward = SubResource("Resource_reward")
+hint_text_key = &"ep1.raindrop_rhythm.wrong"
+intro_dialogue_key = &""
+solved_dialogue_key = &""

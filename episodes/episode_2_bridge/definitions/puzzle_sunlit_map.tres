@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="PuzzleDefinition" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://puzzles/puzzle_definition.gd" id="1_def"]
+
+[resource]
+script = ExtResource("1_def")
+puzzle_id = &"ep2bridge.sunlit_map"
+display_name = "Sunlit Map Activation"
+episode_id = &"ep2bridge"
+fragment_reward = null
+hint_text_key = &"ep2bridge.sunlit_map"
+intro_dialogue_key = &""
+solved_dialogue_key = &"ep2bridge.sunlit_map_solved"

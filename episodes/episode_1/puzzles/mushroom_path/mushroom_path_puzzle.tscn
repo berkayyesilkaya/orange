@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_1/puzzles/mushroom_path/mushroom_path_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_1/definitions/puzzle_mushroom_path.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cluster"]
+size = Vector2(64, 64)
+
+[node name="MushroomPathPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+definition = ExtResource("2_res")
+
+[node name="Cluster1" type="Area2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.mushroom_path.1"
+display_label = "Smallest Mushroom"
+action_label = "Inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cluster1"]
+shape = SubResource("RectangleShape2D_cluster")
+
+[node name="Cluster2" type="Area2D" parent="."]
+position = Vector2(200, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.mushroom_path.2"
+display_label = "Small Mushroom"
+action_label = "Inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cluster2"]
+shape = SubResource("RectangleShape2D_cluster")
+
+[node name="Cluster3" type="Area2D" parent="."]
+position = Vector2(300, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.mushroom_path.3"
+display_label = "Medium Mushroom"
+action_label = "Inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cluster3"]
+shape = SubResource("RectangleShape2D_cluster")
+
+[node name="Cluster4" type="Area2D" parent="."]
+position = Vector2(400, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.mushroom_path.4"
+display_label = "Large Mushroom"
+action_label = "Inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cluster4"]
+shape = SubResource("RectangleShape2D_cluster")
+
+[node name="Cluster5" type="Area2D" parent="."]
+position = Vector2(500, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.mushroom_path.5"
+display_label = "Largest Mushroom"
+action_label = "Inspect"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cluster5"]
+shape = SubResource("RectangleShape2D_cluster")

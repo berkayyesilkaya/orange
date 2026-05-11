@@ -1,0 +1,18 @@
+{
+    "ep2bridge.sunlit_map_no_card": {
+        "orange": "Mii... ruuu?",
+        "english": "I need the map first. Something about the light here..."
+    },
+    "ep2bridge.sunlit_map_start": {
+        "orange": "Oru kalaa~",
+        "english": "The map responds to the light! I need to align it carefully."
+    },
+    "ep2bridge.sunlit_map_solved": {
+        "orange": "Miruu! Kalaa suu ruu!",
+        "english": "The route... it's there. Shimmering in the light, through the waterfall."
+    },
+    "ep2bridge.prototype_end": {
+        "orange": "Ruu kalaa... miruu.",
+        "english": "The forest remembers you. To be continued."
+    }
+}

@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_1/puzzles/animal_tracks/animal_tracks_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_1/definitions/puzzle_animal_tracks.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trail"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hint"]
+size = Vector2(32, 32)
+
+[node name="AnimalTracksPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+correct_trail = &"deer"
+definition = ExtResource("2_res")
+
+[node name="HintSymbol" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+texture = SubResource("PlaceholderTexture2D_hint")
+modulate = Color(0.8, 0.4, 0.2, 1)
+
+[node name="TrailRabbit" type="Area2D" parent="."]
+position = Vector2(-150, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.animal_tracks.rabbit"
+display_label = "Rabbit Tracks"
+action_label = "Follow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrailRabbit"]
+shape = SubResource("RectangleShape2D_trail")
+
+[node name="TrailDeer" type="Area2D" parent="."]
+position = Vector2(-50, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.animal_tracks.deer"
+display_label = "Deer Tracks"
+action_label = "Follow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrailDeer"]
+shape = SubResource("RectangleShape2D_trail")
+
+[node name="TrailFox" type="Area2D" parent="."]
+position = Vector2(50, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.animal_tracks.fox"
+display_label = "Fox Tracks"
+action_label = "Follow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrailFox"]
+shape = SubResource("RectangleShape2D_trail")
+
+[node name="TrailBird" type="Area2D" parent="."]
+position = Vector2(150, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.animal_tracks.bird"
+display_label = "Bird Tracks"
+action_label = "Follow"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrailBird"]
+shape = SubResource("RectangleShape2D_trail")

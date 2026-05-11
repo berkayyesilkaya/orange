@@ -9,6 +9,16 @@
 [ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
 [ext_resource type="Script" path="res://episodes/zone_exit.gd" id="9"]
+[ext_resource type="PackedScene" path="res://episodes/episode_1/puzzles/mushroom_path/mushroom_path_puzzle.tscn" id="10_puzzle"]
+[ext_resource type="PackedScene" path="res://fragments/fragment_pickup.tscn" id="11_frag"]
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="12_frag_reward"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("12_frag_reward")
+fragment_id = &"ep1.map.frag_1"
+key_item_id = &"key.secret_map_card"
+frame_slot = 0
+art_path = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
 size = Vector2(2560, 1440)
@@ -16,9 +26,9 @@ size = Vector2(2560, 1440)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
 size = Vector2(64, 400)
 
-[node name="Zone1ForestEntry" type="Node2D"]
+[node name="Zone2MushroomGrove" type="Node2D"]
 script = ExtResource("1")
-zone_id = &"ep1.zone_1"
+zone_id = &"ep1.zone_2"
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -29,13 +39,20 @@ shape = SubResource("RectangleShape2D_walkable")
 
 [node name="Interactables" type="Node2D" parent="."]
 
-; Exit trigger on the right edge — leads to Zone 2.
-[node name="ExitToZone2" type="Area2D" parent="."]
+[node name="MushroomPathPuzzle" parent="Interactables" instance=ExtResource("10_puzzle")]
+position = Vector2(500, 720)
+
+[node name="FragmentPickup" parent="Interactables" instance=ExtResource("11_frag")]
+position = Vector2(1000, 720)
+reward = SubResource("Resource_reward")
+
+; Exit trigger on the right edge — leads to Zone 3.
+[node name="ExitToZone3" type="Area2D" parent="."]
 position = Vector2(1280, 0)
 script = ExtResource("9")
-target_zone_id = &"ep1.zone_2"
+target_zone_id = &"ep1.zone_3"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToZone2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToZone3"]
 shape = SubResource("RectangleShape2D_exit")
 
 [node name="OrangeCharacter" parent="." instance=ExtResource("2")]
@@ -54,3 +71,5 @@ target_path = NodePath("../OrangeCharacter")
 [node name="InteractionManager" type="Node" parent="."]
 script = ExtResource("6")
 orange = NodePath("OrangeCharacter")
+
+[connection signal="action_dispatched" from="InteractionManager" to="Interactables/FragmentPickup" method="_on_action_dispatched"]

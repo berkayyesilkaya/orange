@@ -123,18 +123,30 @@ func _show_floating_label(interactable: Interactable) -> void:
 	label.show_label(text, interactable.global_position)
 
 
+const _LABEL_PATHS: Array[String] = [
+	"res://data/floating_labels/episode_1.json",
+	"res://data/floating_labels/episode_2_bridge.json",
+]
+
+## Allows external nodes (e.g. MapCompletionTrigger) to block interaction
+## during scripted sequences without accessing private state directly.
+func set_busy(busy: bool) -> void:
+	_is_busy = busy
+
+
 func _load_label_data() -> void:
-	var episode: String = str(GameState.current_episode)
-	var path := "res://data/floating_labels/%s.json" % episode
-	if not FileAccess.file_exists(path):
-		return
-	var file := FileAccess.open(path, FileAccess.READ)
-	if not file:
-		return
-	var json := JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		push_warning("InteractionManager: JSON parse error in '%s'" % path)
-		return
-	file.close()
-	if json.data is Dictionary:
-		_label_data = json.data
+	for path in _LABEL_PATHS:
+		if not FileAccess.file_exists(path):
+			continue
+		var file := FileAccess.open(path, FileAccess.READ)
+		if not file:
+			push_warning("InteractionManager: cannot open '%s'" % path)
+			continue
+		var raw := file.get_as_text()
+		file.close()
+		var json := JSON.new()
+		if json.parse(raw) != OK:
+			push_warning("InteractionManager: JSON parse error in '%s'" % path)
+			continue
+		if json.data is Dictionary:
+			_label_data.merge(json.data, true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
 [ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
@@ -8,17 +8,29 @@
 [ext_resource type="Script" path="res://interaction/interaction_manager.gd" id="6"]
 [ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
 [ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
-[ext_resource type="Script" path="res://episodes/zone_exit.gd" id="9"]
+[ext_resource type="PackedScene" path="res://episodes/episode_1/puzzles/wet_bark_symbol/wet_bark_symbol_puzzle.tscn" id="9_puzzle"]
+[ext_resource type="PackedScene" path="res://fragments/fragment_pickup.tscn" id="10_frag"]
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="11_frag_reward"]
+[ext_resource type="Script" path="res://episodes/episode_1/zones/map_completion_trigger.gd" id="12_map_trigger"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("11_frag_reward")
+fragment_id = &"ep1.map.frag_4"
+key_item_id = &"key.secret_map_card"
+frame_slot = 3
+art_path = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
 size = Vector2(2560, 1440)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
-size = Vector2(64, 400)
-
-[node name="Zone1ForestEntry" type="Node2D"]
+; Zone 4 is the final Episode 1 zone — no exit to a next zone.
+; Transition to Episode 2 bridge happens via key_item_completed, handled by EpisodeController.
+[node name="Zone4BarkClearing" type="Node2D"]
 script = ExtResource("1")
-zone_id = &"ep1.zone_1"
+zone_id = &"ep1.zone_4"
+
+[node name="MapCompletionTrigger" type="Node" parent="."]
+script = ExtResource("12_map_trigger")
 
 [node name="Background" type="Node2D" parent="."]
 
@@ -29,14 +41,12 @@ shape = SubResource("RectangleShape2D_walkable")
 
 [node name="Interactables" type="Node2D" parent="."]
 
-; Exit trigger on the right edge — leads to Zone 2.
-[node name="ExitToZone2" type="Area2D" parent="."]
-position = Vector2(1280, 0)
-script = ExtResource("9")
-target_zone_id = &"ep1.zone_2"
+[node name="WetBarkSymbolPuzzle" parent="Interactables" instance=ExtResource("9_puzzle")]
+position = Vector2(500, 720)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToZone2"]
-shape = SubResource("RectangleShape2D_exit")
+[node name="FragmentPickup" parent="Interactables" instance=ExtResource("10_frag")]
+position = Vector2(1000, 720)
+reward = SubResource("Resource_reward")
 
 [node name="OrangeCharacter" parent="." instance=ExtResource("2")]
 
@@ -54,3 +64,5 @@ target_path = NodePath("../OrangeCharacter")
 [node name="InteractionManager" type="Node" parent="."]
 script = ExtResource("6")
 orange = NodePath("OrangeCharacter")
+
+[connection signal="action_dispatched" from="InteractionManager" to="Interactables/FragmentPickup" method="_on_action_dispatched"]

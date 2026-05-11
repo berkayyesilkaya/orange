@@ -11,6 +11,10 @@
         "orange": "Aa... na.",
         "english": "That doesn't feel right. Let me look again."
     },
+    "ep1.mushroom_path.wrong": {
+        "orange": "Aa... na.",
+        "english": "That doesn't feel right. Let me look again."
+    },
     "ep1.mushroom_solved": {
         "orange": "Miru kalaa~",
         "english": "They lit up! A path revealed itself in the rain."
@@ -18,6 +22,22 @@
     "ep1.animal_tracks_start": {
         "orange": "Suu veri?",
         "english": "So many tracks... one set is fresher than the rest."
+    },
+    "ep1.animal_tracks.wrong_rabbit": {
+        "orange": "Mii... na ruu.",
+        "english": "The rabbit hops quickly but doesn't lead anywhere special."
+    },
+    "ep1.animal_tracks.wrong_fox": {
+        "orange": "Oru na... suu.",
+        "english": "The fox trail curves away. That's not the one."
+    },
+    "ep1.animal_tracks.wrong_bird": {
+        "orange": "Ruu mii? Na.",
+        "english": "The bird tracks lift off the ground. They don't lead forward."
+    },
+    "ep1.raindrop_rhythm.wrong": {
+        "orange": "Na... ruu mii.",
+        "english": "The rhythm stumbled. Listen again — the rain is patient."
     },
     "ep1.map_completed": {
         "orange": "Miruu! Kalaa ruu!",

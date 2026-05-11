@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/mini_frame.gd" id="1"]
+
+; MiniFrame — 160x160 top-left progress widget.
+; FrameBorder is a TextureRect for the decorative pixel frame graphic (set in Inspector).
+; SlotsContainer is a GridContainer holding 1-4 TextureRect slot cells built at runtime.
+[node name="MiniFrame" type="Control"]
+custom_minimum_size = Vector2(160, 160)
+script = ExtResource("1")
+
+; Decorative border behind the slots (pixel art frame graphic — set texture in Inspector).
+[node name="FrameBorder" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+; Slot grid — columns set at runtime based on KeyItem.total_fragments.
+[node name="SlotsContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -48.0
+offset_right = 48.0
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4

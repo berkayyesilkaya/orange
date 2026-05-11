@@ -1,0 +1,91 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
+[ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://camera/follow_camera.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://ui/hud.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://ui/action_button.tscn" id="5"]
+[ext_resource type="Script" path="res://interaction/interaction_manager.gd" id="6"]
+[ext_resource type="PackedScene" path="res://ui/dialogue_box.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
+[ext_resource type="Script" path="res://episodes/zone_exit.gd" id="9"]
+[ext_resource type="PackedScene" path="res://episodes/episode_1/puzzles/animal_tracks/animal_tracks_puzzle.tscn" id="10_puzzle"]
+[ext_resource type="PackedScene" path="res://fragments/fragment_pickup.tscn" id="11_frag"]
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="12_frag_reward"]
+[ext_resource type="PackedScene" path="res://episodes/episode_1/puzzles/raindrop_rhythm/raindrop_rhythm_puzzle.tscn" id="13_rhythm_puzzle"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("12_frag_reward")
+fragment_id = &"ep1.map.frag_2"
+key_item_id = &"key.secret_map_card"
+frame_slot = 1
+art_path = ""
+
+[sub_resource type="Resource" id="Resource_reward_3"]
+script = ExtResource("12_frag_reward")
+fragment_id = &"ep1.map.frag_3"
+key_item_id = &"key.secret_map_card"
+frame_slot = 2
+art_path = ""
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
+size = Vector2(2560, 1440)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(64, 400)
+
+[node name="Zone3MuddyPath" type="Node2D"]
+script = ExtResource("1")
+zone_id = &"ep1.zone_3"
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="WalkableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WalkableArea"]
+shape = SubResource("RectangleShape2D_walkable")
+
+[node name="Interactables" type="Node2D" parent="."]
+
+[node name="AnimalTracksPuzzle" parent="Interactables" instance=ExtResource("10_puzzle")]
+position = Vector2(500, 720)
+
+[node name="FragmentPickup" parent="Interactables" instance=ExtResource("11_frag")]
+position = Vector2(1000, 720)
+reward = SubResource("Resource_reward")
+
+[node name="RaindropRhythmPuzzle" parent="Interactables" instance=ExtResource("13_rhythm_puzzle")]
+position = Vector2(1500, 720)
+
+[node name="FragmentPickup3" parent="Interactables" instance=ExtResource("11_frag")]
+position = Vector2(2000, 720)
+reward = SubResource("Resource_reward_3")
+
+; Exit trigger on the right edge — leads to Zone 4.
+[node name="ExitToZone4" type="Area2D" parent="."]
+position = Vector2(1280, 0)
+script = ExtResource("9")
+target_zone_id = &"ep1.zone_4"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitToZone4"]
+shape = SubResource("RectangleShape2D_exit")
+
+[node name="OrangeCharacter" parent="." instance=ExtResource("2")]
+
+[node name="FollowCamera" parent="." instance=ExtResource("3")]
+target_path = NodePath("../OrangeCharacter")
+
+[node name="HUD" parent="." instance=ExtResource("4")]
+
+[node name="ActionButton" parent="." instance=ExtResource("5")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("7")]
+
+[node name="HintButton" parent="." instance=ExtResource("8")]
+
+[node name="InteractionManager" type="Node" parent="."]
+script = ExtResource("6")
+orange = NodePath("OrangeCharacter")
+
+[connection signal="action_dispatched" from="InteractionManager" to="Interactables/FragmentPickup" method="_on_action_dispatched"]
+[connection signal="action_dispatched" from="InteractionManager" to="Interactables/FragmentPickup3" method="_on_action_dispatched"]

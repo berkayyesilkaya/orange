@@ -15,6 +15,7 @@ config_version=5
 config/name="Orange"
 config/features=PackedStringArray("4.3", "Compatibility")
 config/icon="res://icon.svg"
+config/run/main_scene="res://episodes/episode_1/zones/zone_1_forest_entry.tscn"
 
 [display]
 
@@ -23,6 +24,10 @@ window/size/viewport_height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 window/handheld/orientation=0
+
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
 
 [rendering]
 
@@ -39,3 +44,4 @@ EventBus="*res://globals/event_bus.gd"
 GameState="*res://globals/game_state.gd"
 SaveSystem="*res://globals/save_system.gd"
 EpisodeController="*res://globals/episode_controller.gd"
+KeyItemInventory="*res://key_items/key_item_inventory.gd"

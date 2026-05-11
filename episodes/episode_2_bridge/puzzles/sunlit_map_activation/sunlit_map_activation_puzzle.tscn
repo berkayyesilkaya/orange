@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_2_bridge/puzzles/sunlit_map_activation/sunlit_map_activation_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_2_bridge/definitions/puzzle_sunlit_map.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_spot"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btn"]
+size = Vector2(56, 56)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_sunbeam"]
+size = Vector2(128, 16)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_map"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_btn"]
+size = Vector2(56, 56)
+
+[node name="SunlitMapActivationPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+correct_step = 1
+definition = ExtResource("2_res")
+
+; Ambient sunbeam — static angled stripe for visual orientation.
+[node name="Sunbeam" type="Sprite2D" parent="."]
+position = Vector2(0, -60)
+rotation = 0.523599
+texture = SubResource("PlaceholderTexture2D_sunbeam")
+modulate = Color(1.0, 0.95, 0.6, 0.7)
+
+; The interaction spot where the player holds the map up to the light.
+[node name="MapCardSpot" type="Area2D" parent="."]
+script = ExtResource("3_scr")
+interactable_id = &"ep2bridge.sunlit_map.spot"
+display_label = "Sunlit Stone"
+action_label = "Use Map"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapCardSpot"]
+shape = SubResource("RectangleShape2D_spot")
+
+; Map sprite — hidden until the player activates rotate-mode.
+[node name="MapSprite" type="Sprite2D" parent="MapCardSpot"]
+visible = false
+texture = SubResource("PlaceholderTexture2D_map")
+modulate = Color(0.8, 0.7, 0.3, 1.0)
+
+; Rotate-left control — hidden until puzzle is active.
+[node name="RotateLeft" type="Area2D" parent="."]
+visible = false
+position = Vector2(-80, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2bridge.sunlit_map.rotate_left"
+display_label = "Rotate Left"
+action_label = "Turn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotateLeft"]
+shape = SubResource("RectangleShape2D_btn")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotateLeft"]
+texture = SubResource("PlaceholderTexture2D_btn")
+modulate = Color(0.6, 0.8, 1.0, 1.0)
+
+; Rotate-right control — hidden until puzzle is active.
+[node name="RotateRight" type="Area2D" parent="."]
+visible = false
+position = Vector2(80, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep2bridge.sunlit_map.rotate_right"
+display_label = "Rotate Right"
+action_label = "Turn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RotateRight"]
+shape = SubResource("RectangleShape2D_btn")
+
+[node name="Sprite2D" type="Sprite2D" parent="RotateRight"]
+texture = SubResource("PlaceholderTexture2D_btn")
+modulate = Color(0.6, 0.8, 1.0, 1.0)

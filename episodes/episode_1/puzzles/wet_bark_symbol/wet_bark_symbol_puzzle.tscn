@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://episodes/episode_1/puzzles/wet_bark_symbol/wet_bark_symbol_puzzle.gd" id="1_scr"]
+[ext_resource type="Resource" path="res://episodes/episode_1/definitions/puzzle_wet_bark.tres" id="2_res"]
+[ext_resource type="Script" path="res://interaction/interactable.gd" id="3_scr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bark"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bark"]
+size = Vector2(64, 64)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_target"]
+size = Vector2(48, 48)
+
+[node name="WetBarkSymbolPuzzle" type="Node2D"]
+script = ExtResource("1_scr")
+expected_rotations = Array[int]([1, 2, 3])
+definition = ExtResource("2_res")
+
+[node name="TargetSymbol" type="Sprite2D" parent="."]
+position = Vector2(0, -100)
+texture = SubResource("PlaceholderTexture2D_target")
+modulate = Color(0.8, 0.7, 0.2, 1)
+
+[node name="BarkSymbol1" type="Area2D" parent="."]
+position = Vector2(-100, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.wet_bark.1"
+display_label = "Left Symbol"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarkSymbol1"]
+shape = SubResource("RectangleShape2D_bark")
+
+[node name="Sprite2D" type="Sprite2D" parent="BarkSymbol1"]
+texture = SubResource("PlaceholderTexture2D_bark")
+
+[node name="BarkSymbol2" type="Area2D" parent="."]
+position = Vector2(0, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.wet_bark.2"
+display_label = "Center Symbol"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarkSymbol2"]
+shape = SubResource("RectangleShape2D_bark")
+
+[node name="Sprite2D" type="Sprite2D" parent="BarkSymbol2"]
+texture = SubResource("PlaceholderTexture2D_bark")
+
+[node name="BarkSymbol3" type="Area2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("3_scr")
+interactable_id = &"ep1.wet_bark.3"
+display_label = "Right Symbol"
+action_label = "Rotate"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BarkSymbol3"]
+shape = SubResource("RectangleShape2D_bark")
+
+[node name="Sprite2D" type="Sprite2D" parent="BarkSymbol3"]
+texture = SubResource("PlaceholderTexture2D_bark")

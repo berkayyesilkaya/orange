@@ -51,11 +51,19 @@ func show_text(text: String, duration: float = 3.0) -> void:
 	_tween.tween_callback(hide)
 
 
+const _DIALOGUE_FILES: Array[String] = [
+	"res://data/dialogue/episode_1.json",
+	"res://data/dialogue/episode_2_bridge.json",
+]
+
 func _load_dialogue() -> void:
-	var episode: String = str(GameState.current_episode)
-	var path := "res://data/dialogue/%s.json" % episode
+	# Load all known dialogue files and merge them so any scene can show any line.
+	for path in _DIALOGUE_FILES:
+		_load_file(path)
+
+
+func _load_file(path: String) -> void:
 	if not FileAccess.file_exists(path):
-		push_warning("DialogueBox: no dialogue file at '%s'" % path)
 		return
 	var file := FileAccess.open(path, FileAccess.READ)
 	if not file:
@@ -68,4 +76,4 @@ func _load_dialogue() -> void:
 		push_warning("DialogueBox: JSON parse error in '%s'" % path)
 		return
 	if json.data is Dictionary:
-		_lines = json.data
+		_lines.merge(json.data, true)

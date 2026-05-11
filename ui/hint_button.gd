@@ -1,10 +1,10 @@
 class_name HintButton
 extends TextureButton
 
-const _HINT_FILES: Dictionary = {
-	"ep1": "res://data/hints/episode_1.json",
-	"ep2bridge": "res://data/hints/episode_2_bridge.json",
-}
+const _HINT_PATHS: Array[String] = [
+	"res://data/hints/episode_1.json",
+	"res://data/hints/episode_2_bridge.json",
+]
 
 var _current_puzzle_id: StringName = &""
 var _hint_data: Dictionary = {}
@@ -58,17 +58,18 @@ func _set_active(active: bool) -> void:
 
 
 func _load_hint_data() -> void:
-	var episode: String = str(GameState.current_episode)
-	var path: String = _HINT_FILES.get(episode, "")
-	if path.is_empty() or not FileAccess.file_exists(path):
-		return
-	var file := FileAccess.open(path, FileAccess.READ)
-	if not file:
-		return
-	var json := JSON.new()
-	if json.parse(file.get_as_text()) != OK:
-		push_warning("HintButton: JSON parse error in '%s'" % path)
-		return
-	file.close()
-	if json.data is Dictionary:
-		_hint_data = json.data
+	for path in _HINT_PATHS:
+		if not FileAccess.file_exists(path):
+			continue
+		var file := FileAccess.open(path, FileAccess.READ)
+		if not file:
+			push_warning("HintButton: cannot open '%s'" % path)
+			continue
+		var raw := file.get_as_text()
+		file.close()
+		var json := JSON.new()
+		if json.parse(raw) != OK:
+			push_warning("HintButton: JSON parse error in '%s'" % path)
+			continue
+		if json.data is Dictionary:
+			_hint_data.merge(json.data, true)
