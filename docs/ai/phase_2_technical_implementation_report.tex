@@ -1,0 +1,981 @@
+% Orange: Phase 2 Technical Implementation Report
+% Prepared by Claude Opus 4.7 — automated technical author
+% Date: 2026-05-12
+
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{amsmath}
+
+\geometry{
+  top=2.5cm, bottom=2.5cm,
+  left=3cm, right=3cm
+}
+
+% Colour palette (matches Phase 1 report)
+\definecolor{deepforest}{RGB}{34, 85, 55}
+\definecolor{mossgreen}{RGB}{90, 140, 90}
+\definecolor{warmamber}{RGB}{210, 140, 50}
+\definecolor{sunlitgold}{RGB}{220, 170, 60}
+\definecolor{softcream}{RGB}{252, 248, 238}
+\definecolor{critred}{RGB}{180, 30, 30}
+\definecolor{highoran}{RGB}{210, 100, 20}
+\definecolor{medyell}{RGB}{180, 150, 10}
+\definecolor{lowblue}{RGB}{50, 100, 170}
+\definecolor{passgre}{RGB}{30, 130, 60}
+\definecolor{codegrey}{RGB}{245, 245, 245}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=deepforest,
+  urlcolor=mossgreen,
+  citecolor=mossgreen,
+  pdftitle={Orange: Phase 2 Technical Implementation Report},
+  pdfauthor={Technical Author},
+}
+
+\lstset{
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{codegrey},
+  frame=single,
+  breaklines=true,
+  columns=fullflexible,
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{mossgreen}{\textit{Orange}}}
+\fancyhead[R]{\small Phase 2 Technical Implementation Report}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}
+  {\large\bfseries\color{deepforest}}{\thesection}{1em}{}
+\titleformat{\subsection}
+  {\normalsize\bfseries\color{mossgreen}}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}
+  {\normalsize\itshape\color{deepforest}}{\thesubsubsection}{1em}{}
+
+% Status badge helpers
+\newcommand{\statuspass}{\textcolor{passgre}{\textbf{PASS}}}
+\newcommand{\statusfail}{\textcolor{critred}{\textbf{FAIL}}}
+\newcommand{\statuswarn}{\textcolor{medyell}{\textbf{WARN}}}
+\newcommand{\statusna}{\textcolor{gray}{\textbf{N/A}}}
+\newcommand{\sevCrit}{\textcolor{critred}{\textbf{CRITICAL}}}
+\newcommand{\sevHigh}{\textcolor{highoran}{\textbf{HIGH}}}
+\newcommand{\sevMed}{\textcolor{medyell}{\textbf{MEDIUM}}}
+\newcommand{\sevLow}{\textcolor{lowblue}{\textbf{LOW}}}
+\newcommand{\sevFixed}{\textcolor{passgre}{\textbf{FIXED}}}
+
+% ============================================================================
+
+\begin{document}
+
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Huge\bfseries\color{deepforest} Orange\par}
+  \vspace{0.5cm}
+  {\Large\color{mossgreen} Phase 2 Technical Implementation Report\par}
+  \vspace{0.3cm}
+  {\large\itshape Episode 2 --- Sunlit Waterfall\par}
+  \vspace{0.2cm}
+  {\normalsize\itshape Prompts P31\,--\,P42 and Final Post-Audit Fixes\par}
+  \vspace{2cm}
+  \rule{0.6\linewidth}{1pt}\par
+  \vspace{1cm}
+  \begin{tabular}{ll}
+    \textbf{Prepared by:}     & Automated Technical Author (Claude Opus 4.7) \\
+    \textbf{Date:}            & 2026-05-12 \\
+    \textbf{Engine:}          & Godot 4.3 (Compatibility renderer) \\
+    \textbf{Language:}        & GDScript only \\
+    \textbf{Repository:}      & \texttt{/Orange} (main branch) \\
+    \textbf{Phase 1 status:}  & Complete (see Phase 1 report) \\
+    \textbf{Phase 2 status:}  & Implemented, audited, post-audit fixes applied \\
+    \textbf{Milestone:}       & \textcolor{passgre}{\textbf{PASS}} (Episode 2 complete) \\
+  \end{tabular}
+  \vspace{2cm}
+  \rule{0.6\linewidth}{0.4pt}\par
+  \vspace{0.5cm}
+  {\small\itshape This report documents the implementation of Phase 2 (Episode 2:
+  Sunlit Waterfall) and the verification of the four post-audit fixes that
+  followed the Phase 2 QA pass. The report is generated from a static
+  inspection of the repository; it does not substitute for runtime
+  playtesting or a web export smoke test.\par}
+\end{titlepage}
+
+% ============================================================================
+\tableofcontents
+\newpage
+
+% ============================================================================
+\section{Executive Summary}
+
+Phase 2 extends the \textit{Orange} prototype from the Episode 2 sunlit bridge
+into a complete Episode 2 (\textit{Sunlit Waterfall}). The phase is built
+strictly on the architecture established in Phase 1: no new autoloads, no new
+global signals, no new folders outside the additions in
+\texttt{phase2\_prompts.md} \S5.
+
+Phase 2 delivers:
+
+\begin{itemize}[nosep]
+  \item Four new Episode 2 zones (\texttt{ep2.zone\_1}\,--\,\texttt{ep2.zone\_4}).
+  \item Four new Episode 2 puzzles (Sun Reflection, Water Flow Path,
+        Mist Symbol, Rock Water).
+  \item Four Mixed Compass fragment rewards filling \texttt{MiniFrame} slots 0\,--\,3.
+  \item The Mixed Compass completion moment and the Episode 2 end card
+        (\texttt{Ep2EndCard}).
+  \item A live bridge\,$\to$\,Episode 2 transition through
+        \texttt{EpisodeController}, replacing the Phase 1 prototype end card.
+  \item Targeted edits to \texttt{globals/constants.gd},
+        \texttt{globals/episode\_controller.gd}, and
+        \texttt{episodes/zone.gd} for episode detection and routing.
+\end{itemize}
+
+A Phase 2 QA audit identified four issues. All four were resolved through
+targeted fix prompts and have been verified in the current repository:
+
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Category} & \textbf{Found} & \textbf{Fixed} & \textbf{Remaining} \\
+\midrule
+Critical (Episode 2 unplayable) & 2 & 2 & 0 \\
+Medium (architecture / data)    & 1 & 1 & 0 \\
+Low (canonical text)            & 1 & 1 & 0 \\
+\midrule
+\textbf{Total}                  & \textbf{4} & \textbf{4} & \textbf{0} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Static verification confirms the Episode 2 reward chain is now intact:
+puzzle solve $\to$ fragment reveal $\to$ manual collection $\to$ MiniFrame
+slot fill $\to$ save $\to$ Mixed Compass completion $\to$ Ep2EndCard.
+
+\textbf{Phase 2 is ready for a final runtime smoke test and a web export
+validation pass.}
+
+% ============================================================================
+\section{Phase 2 Scope}
+
+\subsection{Implementation Prompts P31\,--\,P42}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Prompt} & \textbf{Module} \\
+\midrule
+P31 & Episode 2 constants (puzzle, fragment, zone IDs) \\
+P32 & Episode 2 JSON data (dialogue, hints, floating labels) \\
+P33 & Episode 2 puzzle resource definitions (\texttt{.tres}) \\
+P34 & Episode 2 zone scenes (four shells) \\
+P35 & Core routing wiring (EpisodeController, zone.gd) \\
+P36 & Bridge\,$\to$\,Episode 2 live transition; PrototypeEndCard removal \\
+P37 & Sun Reflection puzzle (zone 1) \\
+P38 & Water Flow Path puzzle (zone 2) \\
+P39 & Mist Symbol puzzle (zone 3) \\
+P40 & Rock Water puzzle (zone 4) \\
+P41 & Mixed Compass completion + Ep2EndCard \\
+P42 & Final Episode 2 integration pass \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{In Scope}
+
+\begin{itemize}[nosep]
+  \item Four ep2 zones, puzzles, and fragment rewards.
+  \item Three new JSON files under \texttt{data/}.
+  \item Mixed Compass completion trigger in zone 4 and Ep2EndCard.
+  \item Surgical updates to constants, EpisodeController, and zone.gd.
+  \item Removal of \texttt{PrototypeEndCard} from the bridge zone scene.
+\end{itemize}
+
+\subsection{Out of Scope}
+
+Episode 3, the Teleportation Door, dialogue trees, multi-tier hints, inventory
+menus, settings menus, save slots, combat, multiplayer, and procedural
+generation are explicitly out of scope and remain unimplemented.
+
+% ============================================================================
+\section{Architecture Continuity from Phase 1}
+
+Phase 2 introduces no new architecture. All Phase 2 systems compose existing
+Phase 1 modules.
+
+\begin{center}
+\begin{tabular}{p{0.36\linewidth} p{0.56\linewidth}}
+\toprule
+\textbf{Phase 1 contract} & \textbf{Phase 2 reuse} \\
+\midrule
+Six autoloads in fixed order             & Unchanged. No new autoloads. \\
+Ten typed \texttt{EventBus} signals      & Unchanged. No new signals. \\
+\texttt{EpisodeController} = sole scene router & Extended with ep2 zone paths and the bridge\,$\to$\,ep2 \texttt{key\_item\_used} handler. Still the only module that calls \texttt{change\_scene\_to\_file}. \\
+\texttt{PuzzleBase} lifecycle (INACTIVE\,$\to$\,ACTIVE\,$\to$\,SOLVED) & Each ep2 puzzle subclasses \texttt{PuzzleBase}; uses \texttt{start\_puzzle()}, \texttt{mark\_solved()}, and \texttt{\_on\_already\_solved()} unchanged. \\
+\texttt{InteractionManager.action\_dispatched} else-branch & Ep2 sub-interactable IDs (e.g.\ \texttt{ep2.sun\_reflection.stone\_1}) fall through to this branch; \texttt{\_dispatch\_action} is untouched. \\
+\texttt{FragmentPickup} + \texttt{FragmentReward} & Reused as-is. Each ep2 zone instances a \texttt{FragmentPickup} with an inline \texttt{FragmentReward} sub-resource. \\
+\texttt{MiniFrame} (slot-based fill)     & Reused. The Mixed Compass uses slots 0\,--\,3. \\
+\texttt{KeyItemInventory}                & Reused. The Mixed Compass is granted by \texttt{MiniFrame} firing \texttt{key\_item\_completed}. \\
+\texttt{SaveSystem} (single writer)      & Reused. Save fires on each fragment collection; never per-frame. \\
+\texttt{HUD}, \texttt{ActionButton}, \texttt{DialogueBox}, \texttt{HintButton} & Reused unchanged. Hint and dialogue JSON for ep2 are merged via existing array-of-paths loaders. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% ============================================================================
+\section{Implemented File Structure}
+
+Phase 2 adds the following files; folder structure matches
+\texttt{phase2\_prompts.md} \S5.
+
+\begin{lstlisting}
+res://
+  episodes/
+    episode_2/
+      zones/
+        zone_1_waterfall_entry.tscn
+        zone_2_upper_stream.tscn
+        zone_3_mist_pool.tscn
+        zone_4_rock_face.tscn
+      puzzles/
+        sun_reflection/
+          sun_reflection_puzzle.tscn
+          sun_reflection_puzzle.gd
+        water_flow_path/
+          water_flow_path_puzzle.tscn
+          water_flow_path_puzzle.gd
+        mist_symbol/
+          mist_symbol_puzzle.tscn
+          mist_symbol_puzzle.gd
+        rock_water/
+          rock_water_puzzle.tscn
+          rock_water_puzzle.gd
+      definitions/
+        puzzle_sun_reflection.tres
+        puzzle_water_flow.tres
+        puzzle_mist_symbol.tres
+        puzzle_rock_water.tres
+  data/
+    dialogue/episode_2.json
+    hints/episode_2.json
+    floating_labels/episode_2.json
+  ui/
+    ep2_end_card.tscn
+    ep2_end_card.gd
+\end{lstlisting}
+
+Files surgically edited (no rewrites): \texttt{globals/constants.gd},
+\texttt{globals/episode\_controller.gd}, \texttt{episodes/zone.gd},
+\texttt{ui/hint\_button.gd} (paths array), \texttt{ui/dialogue\_box.gd}
+(paths array), \texttt{interaction/interaction\_manager.gd} (paths array),
+\texttt{episodes/episode\_2\_bridge/zones/zone\_sunlit\_clearing.tscn}
+(removed \texttt{EndCardLayer} and \texttt{PrototypeEndCard} nodes).
+
+% ============================================================================
+\section{Constants and Identifiers}
+
+All Episode 2 identifiers are declared as typed \texttt{StringName} constants
+in \texttt{globals/constants.gd}. No string literals are used in the puzzle
+or routing code paths.
+
+\subsection{Puzzle IDs}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Constant} & \textbf{Value} \\
+\midrule
+\texttt{PUZZLE\_SUN\_REFLECTION} & \texttt{\&"ep2.sun\_reflection"} \\
+\texttt{PUZZLE\_WATER\_FLOW}     & \texttt{\&"ep2.water\_flow"} \\
+\texttt{PUZZLE\_MIST\_SYMBOL}    & \texttt{\&"ep2.mist\_symbol"} \\
+\texttt{PUZZLE\_ROCK\_WATER}     & \texttt{\&"ep2.rock\_water"} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Fragment IDs}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Constant} & \textbf{Value} \\
+\midrule
+\texttt{FRAG\_COMPASS\_1} & \texttt{\&"ep2.compass.frag\_1"} \\
+\texttt{FRAG\_COMPASS\_2} & \texttt{\&"ep2.compass.frag\_2"} \\
+\texttt{FRAG\_COMPASS\_3} & \texttt{\&"ep2.compass.frag\_3"} \\
+\texttt{FRAG\_COMPASS\_4} & \texttt{\&"ep2.compass.frag\_4"} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Zone IDs}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Constant} & \textbf{Value} \\
+\midrule
+\texttt{ZONE\_EP2\_1} & \texttt{\&"ep2.zone\_1"} \\
+\texttt{ZONE\_EP2\_2} & \texttt{\&"ep2.zone\_2"} \\
+\texttt{ZONE\_EP2\_3} & \texttt{\&"ep2.zone\_3"} \\
+\texttt{ZONE\_EP2\_4} & \texttt{\&"ep2.zone\_4"} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Episode ID and Prefix Safety}
+
+The Episode 2 episode identifier is \texttt{\&"ep2"}. It is distinct from
+\texttt{\&"ep2bridge"}. All zone IDs use the prefix \texttt{"ep2."} (with a
+dot) so that string-prefix tests do not collide with \texttt{"ep2bridge"}.
+The check order in both \texttt{EpisodeController.\_on\_node\_added} and
+\texttt{zone.gd.\_ready} is:
+
+\begin{lstlisting}
+if zid.begins_with("ep2bridge"):
+    set_episode(&"ep2bridge")
+elif zid.begins_with("ep2."):
+    set_episode(&"ep2")
+elif zid.begins_with("ep1"):
+    set_episode(&"ep1")
+\end{lstlisting}
+
+This order is load-bearing: testing \texttt{"ep2."} before \texttt{"ep2bridge"}
+would misclassify the bridge as Episode 2.
+
+% ============================================================================
+\section{Data Layer}
+
+Three new JSON files were added under \texttt{data/} for Episode 2 content.
+JSON remains text-only; no gameplay state is stored in JSON.
+
+\subsection{Dialogue (\texttt{data/dialogue/episode\_2.json})}
+
+Fourteen keyed entries: per-puzzle \texttt{\_intro}, \texttt{\_wrong}, and
+\texttt{\_solved} lines for each of the four puzzles; a zone entry line
+(\texttt{ep2.entry}); and the Mixed Compass completion line
+(\texttt{ep2.compass\_completed}). Each entry has an \texttt{orange}
+fictional-language string and an \texttt{english} translation.
+
+\subsection{Hints (\texttt{data/hints/episode\_2.json})}
+
+Four plain-string hint entries keyed by puzzle ID. Hints are one-level only,
+consistent with the Phase 1 \texttt{HintButton} contract.
+
+\subsection{Floating Labels (\texttt{data/floating\_labels/episode\_2.json})}
+
+Fifteen entries: three reflective stones, three flow channels and one water
+gate, four mist panels, and four erosion marks. Labels are short, neutral
+nouns intended to be displayed by \texttt{InteractionManager} on tap.
+
+\subsection{Array-Merge Loader Pattern}
+
+All three loaders (\texttt{DialogueBox}, \texttt{HintButton},
+\texttt{InteractionManager}) iterate an internal \texttt{Array[String]} of
+JSON paths and merge the parsed dictionaries with the existing data. Missing
+files are silently skipped. The Episode 2 JSON paths were appended to each
+loader's path array; no logic was rewritten.
+
+\begin{lstlisting}
+const _HINT_PATHS: Array[String] = [
+    "res://data/hints/episode_1.json",
+    "res://data/hints/episode_2_bridge.json",
+    "res://data/hints/episode_2.json",
+]
+\end{lstlisting}
+
+% ============================================================================
+\section{Puzzle Definition Resources}
+
+Each Episode 2 puzzle is described by a \texttt{PuzzleDefinition} resource
+that carries an inline \texttt{FragmentReward} sub-resource. All four
+\texttt{.tres} files declare \texttt{episode\_id = \&"ep2"} and
+\texttt{key\_item\_id = \&"key.mixed\_compass"}.
+
+\begin{center}
+\begin{longtable}{p{0.16\linewidth} p{0.20\linewidth} p{0.30\linewidth} p{0.10\linewidth} p{0.10\linewidth}}
+\toprule
+\textbf{Puzzle} & \textbf{Puzzle ID} & \textbf{Definition Path} & \textbf{Frag.} & \textbf{Slot} \\
+\midrule
+\endfirsthead
+\bottomrule
+\endlastfoot
+
+Sun Reflection &
+\texttt{ep2.sun\_reflection} &
+\texttt{episode\_2/definitions/} \texttt{puzzle\_sun\_reflection.tres} &
+frag\_1 & 0 \\
+
+Water Flow Path &
+\texttt{ep2.water\_flow} &
+\texttt{episode\_2/definitions/} \texttt{puzzle\_water\_flow.tres} &
+frag\_2 & 1 \\
+
+Mist Symbol &
+\texttt{ep2.mist\_symbol} &
+\texttt{episode\_2/definitions/} \texttt{puzzle\_mist\_symbol.tres} &
+frag\_3 & 2 \\
+
+Rock Water &
+\texttt{ep2.rock\_water} &
+\texttt{episode\_2/definitions/} \texttt{puzzle\_rock\_water.tres} &
+frag\_4 & 3 \\
+
+\end{longtable}
+\end{center}
+
+% ============================================================================
+\section{Zone Implementation}
+
+Each Episode 2 zone follows the Episode 1 template: \texttt{Node2D} root
+with \texttt{episodes/zone.gd}, a \texttt{Background} placeholder, a 2560\,$\times$\,1440
+\texttt{WalkableArea}, an \texttt{Interactables} group, the standard UI bundle
+(HUD, ActionButton, DialogueBox, HintButton, InteractionManager), and an
+\texttt{OrangeCharacter} with a \texttt{FollowCamera}. Zones 1\,--\,3 carry a
+\texttt{ZoneExit} pointing to the next zone; zone 4 carries the compass
+completion trigger and the \texttt{Ep2EndCard} instead.
+
+\begin{center}
+\begin{longtable}{p{0.07\linewidth} p{0.13\linewidth} p{0.27\linewidth} p{0.16\linewidth} p{0.07\linewidth} p{0.13\linewidth}}
+\toprule
+\textbf{Zone} & \textbf{Zone ID} & \textbf{Scene Path} & \textbf{Puzzle} & \textbf{Frag.} & \textbf{Exit Target} \\
+\midrule
+\endfirsthead
+\bottomrule
+\endlastfoot
+
+1 & \texttt{ep2.zone\_1} & \texttt{episode\_2/zones/} \texttt{zone\_1\_waterfall\_entry.tscn}
+  & Sun Reflection  & frag\_1 & \texttt{ep2.zone\_2} \\
+
+2 & \texttt{ep2.zone\_2} & \texttt{episode\_2/zones/} \texttt{zone\_2\_upper\_stream.tscn}
+  & Water Flow Path & frag\_2 & \texttt{ep2.zone\_3} \\
+
+3 & \texttt{ep2.zone\_3} & \texttt{episode\_2/zones/} \texttt{zone\_3\_mist\_pool.tscn}
+  & Mist Symbol     & frag\_3 & \texttt{ep2.zone\_4} \\
+
+4 & \texttt{ep2.zone\_4} & \texttt{episode\_2/zones/} \texttt{zone\_4\_rock\_face.tscn}
+  & Rock Water      & frag\_4 & (none --- Ep2EndCard) \\
+
+\end{longtable}
+\end{center}
+
+Every zone instances a \texttt{FragmentPickup} node under \texttt{Interactables}
+with an inline \texttt{FragmentReward} sub-resource matching the zone's puzzle.
+Each zone scene also declares the connection
+\texttt{InteractionManager.action\_dispatched} $\to$
+\texttt{Interactables/FragmentPickup.\_on\_action\_dispatched}, so the pickup
+receives the ``Collect'' action when the player taps it after the puzzle solves.
+
+Zone 4 additionally contains:
+
+\begin{itemize}[nosep]
+  \item a \texttt{CompletionTrigger} node (inline script) that hides
+        \texttt{ActionButton} on \texttt{key\_item\_completed(\&"key.mixed\_compass")};
+  \item an \texttt{Ep2CompletionLayer} (\texttt{CanvasLayer}, \texttt{layer = 64})
+        hosting the \texttt{Ep2EndCard}.
+\end{itemize}
+
+% ============================================================================
+\section{Puzzle Implementation Details}
+
+Each Episode 2 puzzle is a \texttt{Node2D} scene whose root script subclasses
+\texttt{PuzzleBase}. The puzzle scene contains its sub-interactables as
+\texttt{Area2D} children (each carrying \texttt{interaction/interactable.gd}).
+None of the ep2 puzzle roots is itself an \texttt{Interactable}; the puzzles
+auto-start when the zone loads. After the BUG-002 fix, the auto-start is
+deferred so that listeners later in the zone's child order
+(\texttt{HintButton}, \texttt{DialogueBox}) connect to \texttt{puzzle\_started}
+and \texttt{dialogue\_requested} before the signals fire.
+
+The shared auto-start pattern, present in all four puzzles, is:
+
+\begin{lstlisting}
+func _ready() -> void:
+    super()
+    if _state == State.INACTIVE:
+        call_deferred("_deferred_start")
+    elif _state == State.ACTIVE:
+        _connect_manager()
+
+func _deferred_start() -> void:
+    if _state != State.INACTIVE:
+        return
+    start_puzzle()
+    _connect_manager()
+\end{lstlisting}
+
+\subsection{Sun Reflection (zone 1)}
+
+\begin{itemize}[nosep]
+  \item Scene: \texttt{episodes/episode\_2/puzzles/sun\_reflection/} \texttt{sun\_reflection\_puzzle.tscn}
+  \item Script: same folder, \texttt{sun\_reflection\_puzzle.gd}
+  \item Sub-interactables: \texttt{Stone1}, \texttt{Stone2}, \texttt{Stone3}
+        with IDs \texttt{ep2.sun\_reflection.stone\_\{1,2,3\}}
+  \item Action label: ``Rotate''
+  \item Exports: \texttt{correct\_rotation\_stone1/2/3 : int} (defaults 2, 1, 3)
+  \item Mechanic: each tap rotates the stone by 90$^\circ$ (\texttt{rotation\_step}
+        wraps mod 4); after every rotate, the puzzle checks all three rotations
+        against their correct values.
+  \item Solve condition: all three rotations equal their exported correct values.
+  \item Wrong-answer behavior: none --- no dialogue, no state reset; the player
+        keeps rotating.
+  \item Fragment reward: \texttt{ep2.compass.frag\_1}, MiniFrame slot 0.
+\end{itemize}
+
+\subsection{Water Flow Path (zone 2)}
+
+\begin{itemize}[nosep]
+  \item Scene: \texttt{episodes/episode\_2/puzzles/water\_flow\_path/} \texttt{water\_flow\_path\_puzzle.tscn}
+  \item Script: same folder, \texttt{water\_flow\_path\_puzzle.gd}
+  \item Sub-interactables: \texttt{Channel1\,--\,3} (toggleable), \texttt{ConfirmFlow}
+        (the water gate) with IDs \texttt{ep2.water\_flow.channel\_\{1,2,3\}}
+        and \texttt{ep2.water\_flow.confirm}
+  \item Action label: ``Open''\,/\,``Close'' (updated dynamically), ``Send Water'' for confirm
+  \item Exports: \texttt{expected\_open : Array[StringName]} (default
+        \texttt{[channel\_1, channel\_3]})
+  \item Mechanic: toggling a channel flips its \texttt{is\_open} flag and the
+        action label; confirming compares the set of open channels against
+        \texttt{expected\_open} regardless of order.
+  \item Solve condition: open-channel set equals \texttt{expected\_open} on confirm.
+  \item Wrong-answer behavior: shows \texttt{ep2.water\_flow\_wrong} dialogue;
+        channel states are preserved (no reset).
+  \item Fragment reward: \texttt{ep2.compass.frag\_2}, MiniFrame slot 1.
+\end{itemize}
+
+\subsection{Mist Symbol (zone 3)}
+
+\begin{itemize}[nosep]
+  \item Scene: \texttt{episodes/episode\_2/puzzles/mist\_symbol/} \texttt{mist\_symbol\_puzzle.tscn}
+  \item Script: same folder, \texttt{mist\_symbol\_puzzle.gd}
+  \item Sub-interactables: \texttt{PanelA\,--\,D} with IDs
+        \texttt{ep2.mist\_symbol.panel\_\{a,b,c,d\}}; a static
+        \texttt{ReferenceSymbol} \texttt{Sprite2D} (deliberately not an
+        \texttt{Interactable}; has no collision shape, so
+        \texttt{InteractionManager} ignores it).
+  \item Action label: ``Examine''
+  \item Exports: \texttt{correct\_panel : StringName} (default
+        \texttt{\&"ep2.mist\_symbol.panel\_c"})
+  \item Mechanic: examining a panel compares its ID to \texttt{correct\_panel}.
+  \item Solve condition: the examined panel ID equals \texttt{correct\_panel}.
+  \item Wrong-answer behavior: shows \texttt{ep2.mist\_symbol\_wrong} dialogue;
+        no state change.
+  \item Fragment reward: \texttt{ep2.compass.frag\_3}, MiniFrame slot 2.
+\end{itemize}
+
+\subsection{Rock Water (zone 4)}
+
+\begin{itemize}[nosep]
+  \item Scene: \texttt{episodes/episode\_2/puzzles/rock\_water/} \texttt{rock\_water\_puzzle.tscn}
+  \item Script: same folder, \texttt{rock\_water\_puzzle.gd}
+  \item Sub-interactables: \texttt{MarkA\,--\,D} with IDs
+        \texttt{ep2.rock\_water.mark\_\{a,b,c,d\}} positioned lowest-to-highest.
+  \item Action label: ``Touch''
+  \item Exports: \texttt{expected\_order : Array[StringName]} (default
+        \texttt{[mark\_a, mark\_b, mark\_c, mark\_d]})
+  \item Mechanic: each tap appends to \texttt{\_tapped\_sequence} and validates
+        the prefix; if the prefix diverges, the sequence is cleared and
+        \texttt{ep2.rock\_water\_wrong} dialogue plays.
+  \item Solve condition: \texttt{\_tapped\_sequence} matches the full
+        \texttt{expected\_order}.
+  \item Wrong-answer behavior: sequence reset; dialogue shown; puzzle state
+        remains ACTIVE.
+  \item Fragment reward: \texttt{ep2.compass.frag\_4}, MiniFrame slot 3.
+        Filling slot 3 triggers \texttt{key\_item\_completed(\&"key.mixed\_compass")}.
+\end{itemize}
+
+\subsection{Save/Load Implications}
+
+For all four puzzles, \texttt{PuzzleBase.\_ready()} consults
+\texttt{GameState.is\_puzzle\_completed(puzzle\_id)}. If completed on load,
+\texttt{\_state} becomes \texttt{SOLVED}, \texttt{\_on\_already\_solved()} runs
+(hiding sub-interactables), and the puzzle does not auto-start. Collected
+fragments are restored to the MiniFrame via \texttt{\_restore\_from\_state()}.
+A \texttt{FragmentPickup} whose fragment is already in
+\texttt{GameState.collected\_fragments} stays hidden.
+
+% ============================================================================
+\section{Bridge Transition}
+
+\subsection{Removal of PrototypeEndCard from the Bridge Scene}
+
+Per P36, the \texttt{EndCardLayer} (\texttt{CanvasLayer}) and the
+\texttt{PrototypeEndCard} node were removed from
+\texttt{episodes/episode\_2\_bridge/zones/} \texttt{zone\_sunlit\_clearing.tscn}.
+The \texttt{ui/prototype\_end\_card.tscn} and \texttt{.gd} files remain on
+disk so that the Phase 1 reference flow can still be reproduced in isolated
+tests, but they are no longer instanced in any zone.
+
+\subsection{Live Transition via EpisodeController}
+
+The bridge puzzle (\texttt{SunlitMapActivationPuzzle}, Phase 1) still emits
+\texttt{key\_item\_used(\&"key.secret\_map\_card", \&"sunlit\_clearing")} on
+solve. \texttt{EpisodeController} now listens for this signal:
+
+\begin{lstlisting}
+func _on_key_item_used(key_item_id: StringName, context: StringName) -> void:
+    if key_item_id == Constants.KEY_SECRET_MAP_CARD \
+            and context == &"sunlit_clearing":
+        var path := zone_path_for_id(Constants.ZONE_EP2_1)
+        if path.is_empty():
+            push_error("EpisodeController: ep2.zone_1 path not registered.")
+            return
+        EventBus.zone_change_requested.emit(path)
+\end{lstlisting}
+
+\texttt{\_change\_scene\_faded} then runs its standard
+\texttt{SoftTransition} play-out, \texttt{change\_scene\_to\_file}, and
+play-in. Scene changes remain centralized in \texttt{EpisodeController}; no
+other module calls \texttt{change\_scene\_to\_file}.
+
+% ============================================================================
+\section{Mixed Compass Completion and End Card}
+
+\subsection{Fragment Collection Chain}
+
+Each ep2 puzzle solve fires \texttt{fragment\_revealed(puzzle\_id, fragment\_id)}.
+The zone's \texttt{FragmentPickup} reacts by un-hiding itself. The player
+taps it and presses ``Collect'', which causes \texttt{FragmentPickup.\_collect()}
+to:
+
+\begin{enumerate}[nosep]
+  \item mark the fragment collected on \texttt{GameState};
+  \item emit \texttt{fragment\_collected(fragment\_id, key\_item\_id)};
+  \item emit \texttt{save\_requested(\&"fragment\_collected")};
+  \item call \texttt{queue\_free()}.
+\end{enumerate}
+
+\texttt{MiniFrame} listens to \texttt{fragment\_collected}, looks up the
+\texttt{frame\_slot} for the fragment by scanning the active episode's
+definitions folder, and animates the slot fill. After filling slot 3 (the
+fourth compass fragment), \texttt{\_check\_completion()} sees four filled
+slots and emits \texttt{key\_item\_completed(\&"key.mixed\_compass")}.
+
+\subsection{Ep2EndCard}
+
+\texttt{ui/ep2\_end\_card.gd} (a \texttt{Control}) is hidden on
+\texttt{\_ready()} and connects to \texttt{EventBus.key\_item\_completed}.
+On the first matching event (the guard
+\texttt{key\_item\_id != \&"key.mixed\_compass"} filters out the Secret Map
+Card), the handler:
+
+\begin{enumerate}[nosep]
+  \item disconnects so that subsequent events do not re-show the card;
+  \item waits 2.5\,s for the solved dialogue to clear;
+  \item emits \texttt{ep2.compass\_completed} via \texttt{dialogue\_requested};
+  \item fades the card in over 0.8\,s.
+\end{enumerate}
+
+The end card displays the Orange fictional line ``RUUU!'' and the English
+line ``The compass is ready. The river awaits. To be continued.''.
+A ``Play Again'' button opens a confirmation panel with ``Yes, again'' and
+``No, stay'' choices.
+
+\subsection{Play Again --- Save Wipe and Reset}
+
+``Yes, again'' calls \texttt{SaveSystem.wipe()} (which deletes
+\texttt{user://save.json} if present and calls \texttt{GameState.reset()}),
+plays a soft transition out, and emits
+\texttt{zone\_change\_requested(ep1.zone\_1)}. \texttt{EpisodeController}
+performs the scene change, and the player re-enters Episode 1 with an empty
+save. ``No, stay'' simply hides the confirmation panel; the end card remains.
+
+\texttt{Ep2EndCard} routes its scene change through
+\texttt{EventBus.zone\_change\_requested.emit(\dots)} and never calls
+\texttt{change\_scene\_to\_file} directly --- consistent with the C05
+architectural rule.
+
+% ============================================================================
+\section{Final Post-Audit Fixes}
+
+The Phase 2 audit identified four defects. All four have been resolved on
+\texttt{main} with one commit each.
+
+\begin{center}
+\begin{longtable}{p{0.06\linewidth} p{0.24\linewidth} p{0.32\linewidth} p{0.20\linewidth} p{0.07\linewidth}}
+\toprule
+\textbf{ID} & \textbf{Problem} & \textbf{Fix} & \textbf{Commit} & \textbf{Result} \\
+\midrule
+\endfirsthead
+\bottomrule
+\endlastfoot
+
+BUG-001 &
+\texttt{FragmentPickup} nodes were missing from all four Episode 2 zones. Puzzle solves fired \texttt{fragment\_revealed} but nothing in the scene responded; fragments never appeared and the entire reward chain broke. &
+Added a \texttt{FragmentPickup} under \texttt{Interactables} in each of the four ep2 zones, each with an inline \texttt{FragmentReward} sub-resource and an explicit \texttt{action\_dispatched} signal connection. .tscn-only change. &
+\texttt{cc5a873} \newline \texttt{fix(ep2): add FragmentPickup nodes to all four Episode 2 zones (BUG-001)} &
+\sevFixed \\
+
+BUG-002 &
+Each ep2 puzzle called \texttt{start\_puzzle()} synchronously in its own \texttt{\_ready()}. Because the puzzle node lives in \texttt{Interactables} (an earlier sibling than \texttt{HintButton} and \texttt{DialogueBox} in the zone tree), \texttt{puzzle\_started} and \texttt{dialogue\_requested} fired before those listeners connected. The hint button stayed disabled and the intro dialogue was missed. &
+Each puzzle's \texttt{\_ready()} now uses \texttt{call\_deferred("\_deferred\_start")}; \texttt{\_deferred\_start()} re-checks \texttt{State.INACTIVE} before invoking \texttt{start\_puzzle()} and then \texttt{\_connect\_manager()}. \texttt{PuzzleBase} is unchanged. &
+\texttt{88d520f} \newline \texttt{fix(ep2): defer puzzle auto-start so HintButton/DialogueBox can hear puzzle\_started (BUG-002)} &
+\sevFixed \\
+
+BUG-003 &
+\texttt{ui/prototype\_end\_card.gd} called \texttt{get\_tree().change\_scene\_to\_file()} directly from its restart handler, violating the C05 contract that only \texttt{EpisodeController} performs scene changes. The card is no longer instanced in the bridge zone, but the contract violation remained on disk. &
+Replaced the direct call with \texttt{EventBus.zone\_change\_requested.emit(zone1\_path)}. The existing \texttt{SoftTransition} play-out is preserved. &
+\texttt{28283a3} \newline \texttt{fix(arch): route prototype\_end\_card restart through EpisodeController (BUG-003)} &
+\sevFixed \\
+
+BUG-004 &
+\texttt{data/dialogue/episode\_2.json} held a non-canonical English line for \texttt{ep2.compass\_completed} (``The compass is whole. The river is waiting.''), diverging from \texttt{phase2\_prompts.md} \S10.1. &
+Restored the canonical text: ``The Mixed Compass is complete. It will guide me wherever I need to go.''. JSON remains valid. &
+\texttt{dfa3251} \newline \texttt{fix(data): restore canonical ep2.compass\_completed dialogue text (BUG-004)} &
+\sevFixed \\
+
+\end{longtable}
+\end{center}
+
+\subsection{Verification Method}
+
+Each fix was verified by static inspection of the current repository:
+
+\begin{itemize}[nosep]
+  \item \textbf{BUG-001}: Confirmed each of the four zone scenes contains a
+        \texttt{FragmentPickup} node under \texttt{Interactables}, an inline
+        \texttt{Resource\_reward} sub-resource with the correct
+        \texttt{fragment\_id}, \texttt{key\_item\_id}, and \texttt{frame\_slot}
+        (0/1/2/3 for zones 1/2/3/4), and an
+        \texttt{[connection signal="action\_dispatched"\dots]} entry. Zone 4
+        additionally retains \texttt{CompletionTrigger},
+        \texttt{Ep2CompletionLayer}, and \texttt{Ep2EndCard}.
+  \item \textbf{BUG-002}: Confirmed all four ep2 puzzle scripts (Sun
+        Reflection, Water Flow Path, Mist Symbol, Rock Water) call
+        \texttt{super()} first, then defer the start via
+        \texttt{call\_deferred("\_deferred\_start")}, and that
+        \texttt{\_deferred\_start} guards against state mutation between the
+        deferral and execution.
+  \item \textbf{BUG-003}: Confirmed \texttt{grep "change\_scene\_to\_file"
+        ui/prototype\_end\_card.gd} returns no matches; the only remaining
+        occurrence of \texttt{change\_scene\_to\_file} in the repository is in
+        \texttt{globals/episode\_controller.gd}, the sole authorized caller.
+  \item \textbf{BUG-004}: Confirmed line 15 of
+        \texttt{data/dialogue/episode\_2.json} contains exactly the canonical
+        English string. JSON parse is valid.
+\end{itemize}
+
+% ============================================================================
+\section{Save / Load Behavior}
+
+Phase 2 preserves the Phase 1 save contract.
+
+\begin{itemize}[nosep]
+  \item \textbf{Save trigger}: a save is requested only via
+        \texttt{EventBus.save\_requested}. In Episode 2 the only emitter is
+        \texttt{FragmentPickup.\_collect()}, fired after each of the four
+        compass fragments is collected.
+  \item \textbf{Debounce}: \texttt{SaveSystem} uses a \texttt{\_save\_queued}
+        flag with \texttt{call\_deferred} to coalesce same-frame requests
+        into a single write. No per-frame saves.
+  \item \textbf{Persisted state}: \texttt{completed\_puzzles},
+        \texttt{collected\_fragments}, \texttt{owned\_key\_items},
+        \texttt{completed\_key\_items}, \texttt{flags},
+        \texttt{current\_episode}, and \texttt{current\_zone}. The schema
+        version (1) is unchanged.
+  \item \textbf{MiniFrame restore}: on zone load,
+        \texttt{MiniFrame.set\_key\_item(\dots)} calls
+        \texttt{\_restore\_from\_state()}, which fills slots for any compass
+        fragments already in \texttt{GameState.collected\_fragments} using
+        \texttt{\_fill\_slot\_instant} (no animation, no re-emit of
+        \texttt{key\_item\_completed}).
+  \item \textbf{Already-solved puzzles}: \texttt{PuzzleBase.\_ready()}
+        detects \texttt{is\_puzzle\_completed(puzzle\_id)} and transitions
+        directly to \texttt{State.SOLVED}, skipping auto-start and hiding
+        sub-interactables via \texttt{\_on\_already\_solved()}.
+  \item \textbf{Play Again}: \texttt{SaveSystem.wipe()} removes
+        \texttt{user://save.json} if it exists (with
+        \texttt{FileAccess.file\_exists} guard) and calls
+        \texttt{GameState.reset()}. The wipe is safe when no save file is
+        present.
+\end{itemize}
+
+% ============================================================================
+\section{Phase 1 Non-Regression Notes}
+
+Phase 2 was implemented through additive prompts and surgical edits. The
+following Phase 1 behaviors remain intact:
+
+\begin{itemize}[nosep]
+  \item \textbf{Episode 1 zones and puzzles}: untouched. The four ep1 puzzle
+        scenes, the four ep1 puzzle scripts, and the four ep1 zone scenes
+        carry no Phase 2 modifications.
+  \item \textbf{Secret Map Card flow}: zones 2\,--\,4 still place a
+        \texttt{FragmentPickup} for the corresponding map fragment; the
+        \texttt{MapCompletionTrigger} in zone 4 still routes through the
+        bridge zone via \texttt{EventBus.zone\_change\_requested}.
+  \item \textbf{Bridge zone ending}: intentionally changed. The bridge no
+        longer shows \texttt{PrototypeEndCard}; instead, solving the bridge
+        puzzle transitions to \texttt{ep2.zone\_1} through
+        \texttt{EpisodeController}.
+  \item \textbf{PrototypeEndCard module}: still present on disk
+        (\texttt{ui/prototype\_end\_card.tscn} and \texttt{.gd}). After the
+        BUG-003 fix it no longer violates C05 and remains available for
+        isolated Phase 1 reference tests.
+  \item \textbf{Episode 1 MiniFrame}: still binds to
+        \texttt{secret\_map\_card.tres} when an ep1 zone loads, courtesy of
+        the unchanged \texttt{EpisodeController.\_EPISODE\_KEY\_ITEMS} entry.
+\end{itemize}
+
+% ============================================================================
+\section{Manual QA Status}
+
+Most QA work for Phase 2 was completed prior to this report (P31\,--\,P42
+prompt verification, the dedicated Phase 2 audit, and the four post-audit
+fixes).
+
+\subsection{Completed}
+
+\begin{itemize}[nosep]
+  \item Static implementation review of all P31\,--\,P42 deliverables.
+  \item Phase 2 audit (\texttt{phase2\_testprompt.md}).
+  \item Fix prompts FX2-009 through FX2-012 applied, committed, and
+        statically verified in the current repository.
+\end{itemize}
+
+\subsection{Recommended Final Smoke Test}
+
+Before tagging a release candidate, perform a single end-to-end runtime
+playthrough from an empty save:
+
+\begin{enumerate}[nosep]
+  \item Delete \texttt{user://save.json}.
+  \item Play through Episode 1 (zones 1\,--\,4), collect all four Secret Map
+        Card fragments, and observe the map completion celebration into the
+        bridge zone.
+  \item Solve the Sunlit Map Activation bridge puzzle; verify the soft fade
+        transitions into \texttt{ep2.zone\_1} (and not \texttt{PrototypeEndCard}).
+  \item In each ep2 zone: verify the puzzle auto-start triggers the intro
+        dialogue line and that the \texttt{HintButton} is active and shows
+        the correct one-level hint.
+  \item Solve each ep2 puzzle, collect the resulting compass fragment, and
+        verify that the corresponding MiniFrame slot fills and that a save
+        is written.
+  \item After collecting frag\_4, verify the Mixed Compass completion
+        dialogue and the \texttt{Ep2EndCard} fade-in.
+  \item Press ``Play Again'' $\to$ ``Yes, again'' and verify the save is
+        wiped and the prototype resets to \texttt{ep1.zone\_1} with an empty
+        MiniFrame.
+  \item Run a web export and repeat steps 2\,--\,7 in the browser build to
+        validate audio gating, touch input, and HUD scaling.
+\end{enumerate}
+
+% ============================================================================
+\section{Known Limitations}
+
+The following are real limitations visible from the current implementation.
+They are not blocking defects.
+
+\begin{itemize}
+  \item \textbf{Placeholder fragment art}: the four compass fragments declare
+        \texttt{art\_path = "res://art/compass\_frag\_\{1,2,3,4\}.png"}. If
+        those files are not yet present, the MiniFrame slot fill uses the
+        empty-slot fallback. Replace with final art before release.
+  \item \textbf{Static verification only}: this report is based on static
+        inspection of the repository. A runtime playthrough and a web export
+        smoke test (see Section~14.2) are still recommended.
+  \item \textbf{Puzzle scene visuals are placeholder}: the puzzle sub-interactables
+        are colored \texttt{Sprite2D}s with \texttt{RectangleShape2D} hit boxes,
+        sufficient for mechanic verification but not for final art delivery.
+\end{itemize}
+
+% ============================================================================
+\section{Conclusion}
+
+\subsection{Phase 2 Status}
+
+The \textit{Orange} Phase 2 implementation is complete. Prompts P31\,--\,P42
+deliver Episode 2 in full: four zones, four puzzles, four Mixed Compass
+fragments, the Mixed Compass completion moment, and the Episode 2 end card.
+The bridge transition has been migrated from the Phase 1 prototype end card
+to a live \texttt{EpisodeController}-owned scene change.
+
+\subsection{Audit Status}
+
+The Phase 2 audit identified four defects --- two critical, one medium, one
+low. All four were fixed in single-purpose commits
+(\texttt{cc5a873}, \texttt{88d520f}, \texttt{28283a3}, \texttt{dfa3251})
+and verified statically.
+
+\subsection{Architectural Integrity}
+
+Phase 2 introduces no new autoloads, no new global signals, and no new
+folders outside the additions specified in \texttt{phase2\_prompts.md} \S5.
+\texttt{EpisodeController} remains the sole owner of
+\texttt{change\_scene\_to\_file}. \texttt{SaveSystem} remains the sole writer
+of \texttt{user://save.json}. The Phase 1 architecture is preserved end to end.
+
+\subsection{Final Verdict}
+
+\begin{center}
+  \large\bfseries\color{passgre}
+  Orange Phase 2 --- PASS (pending runtime smoke test)
+\end{center}
+
+\begin{center}
+  \normalsize Episode 2 implemented across P31\,--\,P42.\\
+  All four post-audit fixes verified.\\
+  Ready for runtime playthrough and web export validation.
+\end{center}
+
+% ============================================================================
+\appendix
+\section{Fix Prompt Reference}
+
+\begin{center}
+\begin{tabular}{lllll}
+\toprule
+\textbf{Bug} & \textbf{Severity} & \textbf{Fix Prompt} & \textbf{Commit} & \textbf{Status} \\
+\midrule
+BUG-001 & \sevCrit & FX2-009 & \texttt{cc5a873} & \sevFixed \\
+BUG-002 & \sevCrit & FX2-010 & \texttt{88d520f} & \sevFixed \\
+BUG-003 & \sevMed  & FX2-011 & \texttt{28283a3} & \sevFixed \\
+BUG-004 & \sevLow  & FX2-012 & \texttt{dfa3251} & \sevFixed \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{File Inventory Summary (Phase 2 additions)}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Category} & \textbf{Count} \\
+\midrule
+Episode 2 zone scenes (\texttt{.tscn})         & 4 \\
+Episode 2 puzzle scenes (\texttt{.tscn})       & 4 \\
+Episode 2 puzzle scripts (\texttt{.gd})        & 4 \\
+Episode 2 puzzle definitions (\texttt{.tres})  & 4 \\
+Episode 2 JSON data files                      & 3 \\
+End card scene (\texttt{.tscn})                & 1 \\
+End card script (\texttt{.gd})                 & 1 \\
+\midrule
+\textbf{Files edited (surgical)} &  \\
+\quad \texttt{globals/constants.gd}                                       & + ep2 constants \\
+\quad \texttt{globals/episode\_controller.gd}                             & + ep2 routes, key\_item\_used handler \\
+\quad \texttt{episodes/zone.gd}                                           & + ep2 prefix detection \\
+\quad \texttt{ui/hint\_button.gd}                                         & + ep2 hints path \\
+\quad \texttt{ui/dialogue\_box.gd}                                        & + ep2 dialogue path \\
+\quad \texttt{interaction/interaction\_manager.gd}                        & + ep2 labels path \\
+\quad \texttt{episodes/episode\_2\_bridge/zones/zone\_sunlit\_clearing.tscn} & - EndCardLayer, - PrototypeEndCard \\
+\quad \texttt{ui/prototype\_end\_card.gd}                                 & C05 compliance (BUG-003) \\
+\quad \texttt{data/dialogue/episode\_2.json}                              & canonical text (BUG-004) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\end{document}
