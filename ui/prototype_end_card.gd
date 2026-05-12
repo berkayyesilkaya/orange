@@ -75,7 +75,7 @@ func _on_confirm_yes() -> void:
 		await transition.play_out()
 
 	var zone1_path: String = EpisodeController.zone_path_for_id(Constants.ZONE_EP1_1)
-	get_tree().change_scene_to_file(zone1_path)
+	EventBus.zone_change_requested.emit(zone1_path)
 
 
 func _on_confirm_no() -> void:
