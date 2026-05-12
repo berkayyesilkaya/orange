@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://episodes/zone.gd" id="1"]
 [ext_resource type="PackedScene" path="res://characters/orange/orange_character.tscn" id="2"]
@@ -10,6 +10,15 @@
 [ext_resource type="PackedScene" path="res://ui/hint_button.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://episodes/episode_2/puzzles/rock_water/rock_water_puzzle.tscn" id="9_puzzle"]
 [ext_resource type="PackedScene" path="res://ui/ep2_end_card.tscn" id="10_end"]
+[ext_resource type="PackedScene" path="res://fragments/fragment_pickup.tscn" id="11_frag"]
+[ext_resource type="Script" path="res://puzzles/fragment_reward.gd" id="12_frag_reward"]
+
+[sub_resource type="Resource" id="Resource_reward"]
+script = ExtResource("12_frag_reward")
+fragment_id = &"ep2.compass.frag_4"
+key_item_id = &"key.mixed_compass"
+frame_slot = 3
+art_path = "res://art/compass_frag_4.png"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_walkable"]
 size = Vector2(2560, 1440)
@@ -44,6 +53,10 @@ shape = SubResource("RectangleShape2D_walkable")
 [node name="RockWaterPuzzle" parent="Interactables" instance=ExtResource("9_puzzle")]
 position = Vector2(600, 720)
 
+[node name="FragmentPickup" parent="Interactables" instance=ExtResource("11_frag")]
+position = Vector2(1000, 720)
+reward = SubResource("Resource_reward")
+
 [node name="OrangeCharacter" parent="." instance=ExtResource("2")]
 
 [node name="FollowCamera" parent="." instance=ExtResource("3")]
@@ -68,3 +81,5 @@ script = SubResource("GDScript_trigger")
 layer = 64
 
 [node name="Ep2EndCard" parent="Ep2CompletionLayer" instance=ExtResource("10_end")]
+
+[connection signal="action_dispatched" from="InteractionManager" to="Interactables/FragmentPickup" method="_on_action_dispatched"]
