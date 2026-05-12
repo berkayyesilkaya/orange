@@ -12,5 +12,5 @@
   "ep2.rock_water_intro":     { "orange": "Ru mimi?",       "english": "These marks remember how high the water climbed." },
   "ep2.rock_water_wrong":     { "orange": "Muu ruu.",       "english": "The water didn't climb in that order." },
   "ep2.rock_water_solved":    { "orange": "Wa ruu wa!",     "english": "The rocks told me everything. The compass is almost ready." },
-  "ep2.compass_completed":    { "orange": "RUUU!",          "english": "The compass is whole. The river is waiting." }
+  "ep2.compass_completed":    { "orange": "RUUU!",          "english": "The Mixed Compass is complete. It will guide me wherever I need to go." }
 }
