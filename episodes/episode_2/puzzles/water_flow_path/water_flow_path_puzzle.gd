@@ -24,9 +24,16 @@ var _im: InteractionManager = null
 func _ready() -> void:
 	super()
 	if _state == State.INACTIVE:
-		start_puzzle()
-	if _state == State.ACTIVE:
+		call_deferred("_deferred_start")
+	elif _state == State.ACTIVE:
 		_connect_manager()
+
+
+func _deferred_start() -> void:
+	if _state != State.INACTIVE:
+		return
+	start_puzzle()
+	_connect_manager()
 
 
 func _connect_manager() -> void:
